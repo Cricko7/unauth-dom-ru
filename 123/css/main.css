@@ -1,0 +1,999 @@
+/* =========================================================
+   main.css — единый стиль проекта «Мой Дом.ру»
+   ========================================================= */
+
+/* ---------- 1. Переменные ---------- */
+:root {
+  --bg-deep:     #030a14;
+  --bg:          #071226;
+  --surface:     #0b244d;
+  --surface-2:   #0a1a30;
+  --text:        #ffffff;
+  --text-soft:   rgba(255,255,255,.62);
+  --accent:      #0189f7;
+  --accent-2:    #067ef3;
+  --accent-soft: rgba(1,137,247,.2);
+  --border:      rgba(3,51,100,.6);
+  --good:        #3dd73b;
+  --warn:        #ffb020;
+  --danger:      #ff3b30;
+  --header-bg:   #050d1c;
+  --footer-bg:   #05111f;
+}
+
+/* ---------- 2. Сброс ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Jura", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font-family: inherit; color: inherit; }
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ---------- 3. Шапка ---------- */
+.header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+.header__inner {
+  max-width: 1440px; margin: 0 auto;
+  padding: 0 40px;
+  height: 84px;
+  display: flex; align-items: center; gap: 32px;
+}
+.logo {
+  width: 200px; height: 34px;
+  background: url("../images/v268_7.png") left center / contain no-repeat;
+  flex-shrink: 0;
+}
+.nav { display: flex; gap: 48px; margin-left: 40px; }
+.nav__link {
+  position: relative;
+  color: var(--text); font: 700 18px "Jura";
+  padding: 6px 0;
+  transition: color .2s;
+}
+.nav__link:hover { color: var(--accent); }
+.nav__link.is-active::after {
+  content: ""; position: absolute;
+  left: 0; right: 0; bottom: -12px; height: 4px;
+  background: var(--accent); border-radius: 12px;
+}
+.header__actions {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 16px;
+}
+
+.user {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 24px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font: 700 16px "Jura";
+}
+.user__avatar {
+  width: 34px; height: 46px;
+  background: url("../images/v300_13.png") center/contain no-repeat;
+  border-radius: 6px;
+}
+.user__arrow {
+  width: 14px; height: 9px;
+  background: url("../images/v300_16.png") center/contain no-repeat;
+}
+
+/* ---------- 4. Подвал ---------- */
+.footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+}
+.footer__inner {
+  max-width: 1440px; margin: 0 auto;
+  padding: 0 40px;
+  display: flex; align-items: center; gap: 40px;
+}
+.footer__logo {
+  width: 240px; height: 40px;
+  background: url("../images/v278_40.png") left center / contain no-repeat;
+  flex-shrink: 0;
+}
+.footer__text { color: var(--text-soft); font: 500 18px "Jura"; }
+.footer__link {
+  margin-left: auto;
+  color: var(--text-soft); font: 500 18px "Jura";
+}
+.footer__link:hover { color: var(--accent); }
+
+/* =========================================================
+   5. ГЛАВНАЯ — HERO
+   ========================================================= */
+.hero {
+  position: relative;
+  width: 100%;
+  padding: 60px 0;
+  overflow: hidden;
+  min-height: 620px;
+}
+.hero__banner {
+  position: absolute; inset: 0;
+  background: url("../images/v278_39.png") center/cover no-repeat;
+  opacity: .85;
+  z-index: 0;
+}
+.hero__container {
+  position: relative; z-index: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items: center;
+}
+.hero__welcome {
+  display: block;
+  width: 220px; height: 32px;
+  background: url("../images/v278_8.png") left center / contain no-repeat;
+  margin-bottom: 10px;
+}
+.hero__title { font: 700 72px/1 "Jura"; color: #fff; letter-spacing: -.5px; }
+.hero__title-accent { display: block; color: var(--accent); }
+.hero__subtitle {
+  max-width: 460px;
+  margin-top: 20px;
+  font: 700 20px/1.5 "Jura";
+  color: #fff;
+}
+
+/* Карточка входа */
+.login {
+  position: relative;
+  width: 100%;
+  border-radius: 32px;
+  padding: 32px 28px;
+  background: linear-gradient(180deg, #041735, #0b244d);
+  color: #fff;
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+.login__title { font: 700 26px "Jura"; margin-bottom: 10px; }
+.login__hint {
+  font: 700 16px/1.4 "Jura";
+  margin-bottom: 20px;
+  color: rgba(255,255,255,.75);
+}
+.login__field {
+  display: flex; align-items: center;
+  width: 100%; height: 56px;
+  padding: 0 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(23,99,172,.48);
+  background: transparent;
+  margin-bottom: 16px;
+}
+.login__field input {
+  width: 100%; height: 100%;
+  background: transparent; border: none; outline: none;
+  color: #fff; font: 400 17px "Inder", "Jura";
+}
+.login__field input::placeholder { color: rgba(255,255,255,.55); }
+.login__btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; height: 56px;
+  border: none; border-radius: 18px;
+  background: var(--accent); color: #fff;
+  font: 700 20px "Jura"; cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+.login__btn:hover { background: var(--accent-2); transform: translateY(-1px); }
+.login__btn-arrow {
+  width: 22px; height: 22px;
+  background: url("../images/v278_6.png") center/contain no-repeat;
+}
+.login__terms {
+  margin-top: 14px;
+  font: 700 13px/1.4 "Jura";
+  color: rgba(255,255,255,.6);
+}
+.login__terms a { color: #7abeff; }
+
+/* ---------- «Что мы предлагаем» ---------- */
+.offers { padding: 80px 0; }
+.offers__title { font: 700 40px "Jura"; margin-bottom: 40px; }
+.offers__grid {
+  display: grid;
+  grid-template-columns: 260px 1fr 340px;
+  gap: 24px;
+  align-items: stretch;
+}
+.offer {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  min-height: 480px;
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  transition: transform .25s;
+  cursor: pointer;
+}
+.offer:hover { transform: translateY(-6px); }
+.offer--check { background: url("../images/v278_10.png") center/cover no-repeat; }
+.offer--wide  { background: url("../images/v278_14.png") center/cover no-repeat; }
+.offer--quest { background: url("../images/v278_27.png") center/cover no-repeat; }
+
+.offer__content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+.offer__title { font: 700 30px/1.1 "Jura"; color: #fff; margin: 0; }
+.offer__text { font: 700 16px/1.5 "Jura"; color: rgba(255,255,255,.85); }
+
+.offer--check, .offer--quest { text-align: center; }
+.offer--check .offer__content,
+.offer--quest .offer__content { align-items: center; }
+
+.offer--wide { text-align: right; }
+.offer--wide .offer__content { align-items: flex-end; }
+.offer--wide .offer__icons { margin-top: 18px; }
+
+.offer__btn {
+  position: relative;
+  z-index: 1;
+  margin-top: 20px;
+  width: 100px; height: 56px;
+  border-radius: 28px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  border: none; cursor: pointer;
+  transition: transform .2s, background .2s;
+}
+.offer__btn:hover { transform: scale(1.05); background: var(--accent-2); }
+.offer__btn-arrow {
+  width: 30px; height: 22px;
+  background: url("../images/v278_28.png") center/contain no-repeat;
+}
+.offer--check .offer__btn { align-self: center; }
+.offer--quest .offer__btn { align-self: center; }
+
+.offer__icons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 24px;
+  width: 100%;
+}
+.offer__icon-item {
+  display: flex; align-items: center; gap: 12px;
+  font: 700 15px/1.3 "Jura";
+  color: #fff;
+  text-align: left;
+}
+.offer__icon {
+  width: 42px; height: 42px;
+  flex-shrink: 0;
+  background-size: contain; background-repeat: no-repeat;
+  border-radius: 8px;
+}
+.offer__icon--1 { background-image: url("../images/v278_22.png"); }
+.offer__icon--2 { background-image: url("../images/v278_23.png"); }
+.offer__icon--3 { background-image: url("../images/v278_24.png"); }
+.offer__icon--4 { background-image: url("../images/v278_25.png"); }
+
+/* ---------- «Почему это удобно» ---------- */
+.why { padding: 60px 0 80px; }
+.why__title { font: 700 40px "Jura"; margin-bottom: 40px; }
+.why__grid {
+  display: grid;
+  grid-template-columns: 1fr 6px 1fr 6px 1fr 6px 1fr;
+  gap: 30px;
+  align-items: stretch;
+}
+.why__divider {
+  background: url("../images/v278_33.png") center/contain no-repeat;
+  width: 6px; min-height: 160px;
+}
+.why__divider--2 { background-image: url("../images/v278_34.png"); }
+.why__divider--3 { background-image: url("../images/v278_36.png"); }
+.why__item { min-height: 160px; }
+.why__icon {
+  width: 68px; height: 60px;
+  margin-bottom: 16px;
+  background-size: contain; background-repeat: no-repeat;
+  border-radius: 10px;
+}
+.why__icon--1 { background-image: url("../images/v278_29.png"); }
+.why__icon--2 { background-image: url("../images/v278_30.png"); }
+.why__icon--3 { background-image: url("../images/v278_31.png"); }
+.why__icon--4 { background-image: url("../images/v278_32.png"); }
+.why__item-title { font: 700 28px "Jura"; margin-bottom: 8px; }
+.why__item-text { font: 500 18px/1.4 "Jura"; color: var(--text-soft); }
+
+/* =========================================================
+   6. ДИАГНОСТИКА — HERO
+   ========================================================= */
+.diag-hero {
+  position: relative;
+  width: 100%;
+  min-height: 620px;
+  padding: 60px 0;
+  overflow: hidden;
+}
+.diag-hero__banner {
+  position: absolute; inset: 0;
+  background: url("../images/v300_35.png") center/cover no-repeat;
+  z-index: 0;
+}
+.diag-hero__banner::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: url("../images/v300_33.png") center/cover no-repeat;
+}
+.diag-hero__container {
+  position: relative; z-index: 1;
+  max-width: 1440px; margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.diag-hero__title { font: 700 64px/1.05 "Jura"; color: #fff; }
+.diag-hero__title span { color: var(--accent); }
+.diag-hero__text {
+  margin: 20px 0;
+  font: 700 20px/1.5 "Jura";
+  color: #fff;
+  max-width: 500px;
+}
+.diag-hero__note {
+  margin-top: 12px;
+  font: 700 18px "Jura";
+  color: #fff;
+}
+.diag-hero__btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 16px 34px;
+  border: none; border-radius: 28px;
+  background: var(--accent); color: #fff;
+  font: 700 22px "Jura"; cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+.diag-hero__btn:hover { background: var(--accent-2); transform: translateY(-2px); }
+.diag-hero__btn-arrow {
+  width: 26px; height: 20px;
+  background: url("../images/v300_30.png") center/contain no-repeat;
+}
+.diag-hero__side {
+  height: 460px;
+  background: url("../images/v300_34.png") center/contain no-repeat;
+}
+
+/* Карточки «Что мы проверим?» */
+.checks { padding: 60px 0; }
+.checks__title { font: 700 40px "Jura"; margin-bottom: 40px; }
+.checks__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.check {
+  border-radius: 30px;
+  padding: 28px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  gap: 14px;
+  min-height: 320px;
+  transition: transform .25s, border-color .25s;
+}
+.check:hover { transform: translateY(-4px); border-color: var(--accent); }
+.check__icon {
+  width: 72px; height: 72px;
+  background-size: contain; background-repeat: no-repeat;
+  border-radius: 12px;
+}
+.check__icon--1 { background-image: url("../images/v300_36.png"); }
+.check__icon--2 { background-image: url("../images/v300_37.png"); }
+.check__icon--3 { background-image: url("../images/v300_38.png"); }
+.check__icon--4 { background-image: url("../images/v300_39.png"); }
+.check__title { font: 700 26px "Jura"; margin: 0; }
+.check__text { font: 500 17px/1.45 "Jura"; margin: 0; color: var(--text-soft); }
+
+/* ---------- Блок «Быстро. Удобно.» ---------- */
+.promo {
+  position: relative;
+  padding: 60px 0;
+  border-radius: 32px;
+  overflow: hidden;
+  background: linear-gradient(120deg, #09182d, #10233e);
+  margin: 40px 0 60px;
+}
+.promo__bg {
+  position: absolute; inset: 0;
+  background: url("../images/v300_59.png") center/cover no-repeat;
+  opacity: .8;
+  pointer-events: none;
+  z-index: 0;
+}
+.promo__grid {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 6px 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 0 60px;
+}
+.promo__divider {
+  width: 6px; min-height: 220px;
+  background: url("../images/v278_33.png") center/contain no-repeat;
+}
+.promo__title {
+  font: 700 40px/1.15 "Jura";
+  color: #fff;
+  margin-bottom: 18px;
+}
+.promo__text {
+  font: 700 18px/1.5 "Jura";
+  color: rgba(255,255,255,.85);
+  max-width: 500px;
+  margin-bottom: 24px;
+}
+.promo__badge {
+  display: inline-flex; align-items: center; gap: 12px;
+  font: 700 20px "Jura"; color: #fff;
+}
+.promo__badge-icon {
+  width: 48px; height: 48px;
+  background: url("../images/v300_57.png") center/contain no-repeat;
+  border-radius: 10px;
+}
+.promo__list {
+  display: flex; flex-direction: column;
+  gap: 16px;
+  font: 700 20px "Jura"; color: #fff;
+}
+
+/* =========================================================
+   7. WI-FI РЯДОМ
+   ========================================================= */
+.wifi-hero {
+  position: relative;
+  padding: 60px 0 24px;
+  display: flex; align-items: flex-start; gap: 32px;
+}
+.wifi-hero__left { flex: 1; }
+.wifi-hero__icon {
+  width: 88px; height: 72px;
+  background: url("../images/v313_33.png") center/contain no-repeat;
+  margin-bottom: 18px;
+  border-radius: 14px;
+}
+.wifi-hero__title { font: 700 56px "Jura"; }
+.wifi-hero__text {
+  margin-top: 12px;
+  font: 700 20px/1.5 "Jura";
+  color: var(--text-soft);
+  max-width: 520px;
+}
+.wifi-hero__city {
+  width: 240px; height: 200px; flex-shrink: 0;
+  background: url("../images/v313_34.png") right top / contain no-repeat;
+}
+
+.filters { display: flex; gap: 14px; margin-top: 24px; }
+.filter {
+  padding: 10px 26px;
+  border-radius: 22px;
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  font: 700 18px "Jura"; cursor: pointer;
+  color: var(--text);
+  transition: background .2s;
+}
+.filter:hover, .filter.is-active { background: var(--accent); color: #fff; }
+
+.wifi-map {
+  margin: 24px 0;
+  height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.wifi-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+.wifi-list {
+  display: flex; flex-direction: column; gap: 14px;
+  margin: 24px 0 40px;
+}
+.wifi-item {
+  display: grid;
+  grid-template-columns: 60px 1.6fr .6fr 180px auto;
+  gap: 20px; align-items: center;
+  padding: 16px 26px;
+  border-radius: 24px;
+  background: linear-gradient(120deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border);
+  transition: transform .25s;
+}
+.wifi-item:hover { transform: translateX(4px); }
+
+.wifi-item__icon {
+  width: 52px; height: 52px;
+  background: url("../images/v313_35.png") center/contain no-repeat;
+  border-radius: 12px;
+}
+.wifi-item__icon--2 { background-image: url("../images/v313_36.png"); }
+.wifi-item__icon--3 { background-image: url("../images/v313_38.png"); }
+.wifi-item__icon--4 { background-image: url("../images/v313_40.png"); }
+.wifi-item__icon--5 { background-image: url("../images/v313_42.png"); }
+
+.wifi-item__name { font: 700 22px "Jura"; }
+.wifi-item__addr { font: 700 16px "Jura"; color: #7e9dd0; margin-top: 2px; }
+.wifi-item__dist { font: 700 18px "Kanchenjunga"; }
+
+.wifi-item__status {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 160px; height: 36px;
+  padding: 0 12px;
+  border-radius: 18px;
+  font: 700 16px "Jura"; color: #fff;
+  justify-self: start;
+  white-space: nowrap;
+}
+.wifi-item__status--ok     { background: rgba(45,150,66,.37); }
+.wifi-item__status--avail  { background: rgba(2,52,108,1); }
+.wifi-item__status--broken { background: rgba(219,37,37,.28); }
+
+.wifi-item__check, .wifi-item__cross {
+  width: 14px; height: 14px;
+  background-size: contain; background-repeat: no-repeat;
+}
+.wifi-item__check { background-image: url("../images/v313_46.png"); }
+.wifi-item__cross { background-image: url("../images/v313_45.png"); }
+.wifi-item__dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #3985bf;
+}
+
+.wifi-item__btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 22px;
+  border-radius: 22px;
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  font: 700 18px "Jura";
+  cursor: pointer;
+  transition: background .2s;
+}
+.wifi-item__btn:hover { background: var(--accent); color: #fff; }
+.wifi-item__btn-arrow {
+  width: 14px; height: 14px;
+  background: url("../images/v313_49.png") center/contain no-repeat;
+}
+
+/* ---------- Квест ---------- */
+.quest {
+  display: flex; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+  padding: 20px 28px;
+  border-radius: 24px;
+  background: #001128;
+  border: 2px solid rgba(3,51,100,.84);
+  margin: 32px 0;
+}
+.quest__icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  background: url("../images/v312_2.png") center/contain no-repeat;
+  border-radius: 10px;
+}
+.quest__title { flex: 1; font: 700 20px "Jura"; color: #fff; }
+.quest__counter { font: 700 20px "Jura"; color: #fff; }
+.quest__counter span { color: #37a8ff; }
+.quest__bar {
+  width: 100%; height: 14px;
+  border-radius: 8px;
+  background: rgba(9,38,72,1);
+  overflow: hidden;
+}
+.quest__progress {
+  width: 40%; height: 100%;
+  background: linear-gradient(90deg, #009efd, #009dfc);
+  border-radius: 8px;
+}
+
+/* ---------- Апселл ---------- */
+.upsell {
+  display: flex; align-items: center; gap: 28px;
+  padding: 28px 32px;
+  margin: 32px 0 48px;
+  border-radius: 24px;
+  background: linear-gradient(120deg, rgba(1,137,247,.22), rgba(1,137,247,.05));
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.upsell__icon {
+  width: 64px; height: 64px; flex-shrink: 0;
+  background: url("../images/v313_145.png") center/contain no-repeat;
+  border-radius: 12px;
+}
+.upsell__content { flex: 1; min-width: 260px; }
+.upsell__title { font: 700 24px "Jura"; margin-bottom: 8px; color: #fff; }
+.upsell__text { font: 500 16px/1.4 "Jura"; color: var(--text-soft); }
+.upsell__price {
+  font: 700 16px "Jura";
+  color: #a3dcff;
+  margin-bottom: 10px;
+}
+.upsell__router {
+  width: 180px; height: 140px; flex-shrink: 0;
+  background: url("../images/v313_138.png") center/contain no-repeat;
+  border-radius: 12px;
+}
+.upsell__btn {
+  padding: 14px 30px;
+  border: none; border-radius: 24px;
+  background: #ff312c; color: #fff;
+  font: 700 20px "Jura";
+  cursor: pointer;
+  transition: transform .15s, background .2s;
+}
+.upsell__btn:hover { transform: translateY(-2px); background: #e01f1a; }
+
+/* =========================================================
+   8. РЕЗУЛЬТАТ
+   ========================================================= */
+.result-hero { text-align: center; padding: 60px 0 20px; }
+.result-hero__title { font: 700 32px "Jura"; margin-bottom: 32px; }
+
+.ring {
+  position: relative;
+  width: 240px; height: 240px;
+  margin: 0 auto 20px;
+}
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring__track {
+  fill: none;
+  stroke: rgba(255,255,255,.08);
+  stroke-width: 12;
+}
+.ring__fill {
+  fill: none;
+  stroke: var(--good);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-dasharray: 628.3;
+  stroke-dashoffset: calc(628.3 - (628.3 * var(--p, 0) / 100));
+  filter: drop-shadow(0 0 10px rgba(61,215,59,.55));
+  transition: stroke-dashoffset 1.2s ease;
+}
+.ring__label {
+  position: absolute; inset: 0;
+  display: grid; place-content: center;
+  text-align: center;
+}
+.ring__value { font: 700 52px "Jura"; color: var(--good); line-height: 1; }
+.ring__caption { font: 700 20px "Jura"; color: var(--good); margin-top: 4px; }
+.result-hero__note {
+  font: 500 18px/1.5 "Jura";
+  color: var(--text-soft);
+  margin-top: 12px;
+}
+
+.result-table { padding: 40px 0; }
+.result-table__row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 16px; align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.result-table__row--head {
+  font: 700 13px "Jura";
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-soft);
+}
+.result-table__name { font: 700 18px "Jura"; }
+.result-table__value { font-size: 17px; color: var(--text-soft); }
+.result-table__value--fact { color: var(--good); font-weight: 700; }
+.badge {
+  display: inline-block;
+  padding: 5px 14px; border-radius: 16px;
+  font: 700 15px "Jura";
+}
+.badge--good { background: rgba(61,215,59,.22); color: var(--good); }
+.badge--muted { background: var(--accent-soft); color: var(--accent); }
+
+.recommendations { padding: 40px 0; }
+.recommendations__title {
+  font: 700 32px "Jura";
+  text-align: center;
+  margin-bottom: 32px;
+}
+.recommendations__grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.recommendations__col {
+  padding: 24px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #091728, #040f1c);
+  border: 1px solid rgba(18,30,44,1);
+}
+.recommendations__col-title {
+  display: flex; justify-content: space-between; align-items: center;
+  font: 700 20px "Jura"; margin-bottom: 20px;
+}
+.recommendations__col-title--free { color: #16be74; }
+.recommendations__col-title--paid { color: var(--accent); }
+
+.rec {
+  display: flex; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.rec:last-child { border-bottom: none; }
+.rec__icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background-size: contain; background-repeat: no-repeat;
+  border-radius: 10px;
+}
+.rec--free-1 .rec__icon { background-image: url("../images/v311_30.png"); }
+.rec--free-2 .rec__icon { background-image: url("../images/v311_33.png"); }
+.rec--free-3 .rec__icon { background-image: url("../images/v311_31.png"); }
+.rec--paid-1 .rec__icon { background-image: url("../images/v311_34.png"); }
+.rec--paid-2 .rec__icon { background-image: url("../images/v311_35.png"); }
+.rec--paid-3 .rec__icon { background-image: url("../images/v311_36.png"); }
+.rec__title { font: 700 17px "Jura"; margin-bottom: 4px; }
+.rec__text { font: 400 14px/1.4 "Jura"; color: var(--text-soft); }
+
+.result-actions {
+  display: flex; gap: 16px; justify-content: center;
+  padding: 24px 0; flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 32px;
+  border: none; border-radius: 24px;
+  font: 700 20px "Jura";
+  cursor: pointer;
+  transition: transform .15s, background .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn--primary { background: rgba(8,99,187,1); color: #fff; }
+.btn--ghost {
+  background: rgba(3,19,42,1); color: #fff;
+  border: 2px solid rgba(51,62,68,.4);
+}
+
+/* =========================================================
+   9. МОДАЛЬНОЕ ОКНО
+   ========================================================= */
+.modal[hidden] { display: none; }
+.modal {
+  position: fixed; inset: 0; z-index: 200;
+  display: grid; place-items: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+.modal__overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.7);
+  backdrop-filter: blur(6px);
+}
+.modal__dialog {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: url("../images/v300_78.png") center/cover no-repeat,
+              var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px;
+  animation: pop .25s ease-out;
+}
+@keyframes pop {
+  from { transform: scale(.95); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.modal__close {
+  position: absolute; top: 14px; right: 14px;
+  width: 34px; height: 34px;
+  border: none; border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--text); font-size: 16px;
+  cursor: pointer;
+  transition: transform .2s;
+}
+.modal__close:hover { transform: rotate(90deg); }
+
+.modal__head {
+  display: flex; gap: 14px; align-items: flex-start;
+  margin-bottom: 22px;
+  padding-right: 40px;
+}
+.modal__icon {
+  width: 60px; height: 60px; flex-shrink: 0;
+  background: url("../images/v300_68.png") center/contain no-repeat;
+  border-radius: 12px;
+}
+.modal__title { font: 700 22px/1.2 "Jura"; margin-bottom: 6px; color: #fff; }
+.modal__subtitle { font: 500 15px/1.4 "Jura"; color: rgba(255,255,255,.75); }
+
+.q {
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  border-radius: 18px;
+  background: rgba(10,26,48,.75);
+  border: 1px solid var(--border);
+}
+.q__head {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 14px;
+}
+.q__num {
+  width: 38px; height: 38px; flex-shrink: 0;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff; font: 700 18px "Kiwi Maru", "Jura";
+}
+.q__title { font: 700 17px/1.3 "Jura"; color: #fff; }
+
+.providers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.provider { cursor: pointer; }
+.provider input { display: none; }
+.provider__body {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(11,36,77,.75);
+  border: 2px solid transparent;
+  transition: border-color .2s, background .2s;
+}
+.provider:hover .provider__body { background: var(--accent-soft); }
+.provider input:checked + .provider__body {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.provider__icon {
+  width: 28px; height: 28px; flex-shrink: 0;
+  background-size: contain; background-repeat: no-repeat;
+}
+.provider--domru   .provider__icon { background-image: url("../images/v300_71.png"); }
+.provider--rtk     .provider__icon { background-image: url("../images/v300_72.png"); }
+.provider--beeline .provider__icon { background-image: url("../images/v300_73.png"); }
+.provider--mts     .provider__icon { background-image: url("../images/v300_74.png"); }
+.provider--ttk     .provider__icon { background-image: url("../images/v300_75.png"); }
+.provider--other   .provider__icon { background-image: url("../images/v300_77.png"); }
+.provider__name { font: 700 15px "Jura"; color: #fff; }
+
+.speeds { display: flex; flex-wrap: wrap; gap: 10px; }
+.speed { cursor: pointer; }
+.speed input { display: none; }
+.speed__body {
+  padding: 10px 20px;
+  border-radius: 14px;
+  background: rgba(11,36,77,.75);
+  border: 2px solid transparent;
+  font: 700 15px "Jura";
+  color: #fff;
+  transition: border-color .2s, background .2s;
+}
+.speed input:checked + .speed__body {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+}
+
+.router {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: rgba(11,36,77,.75);
+  border: 2px solid transparent;
+  font: 700 15px "Jura";
+  color: #fff;
+  cursor: pointer;
+}
+
+.conns { display: flex; gap: 12px; }
+.conn { flex: 1; cursor: pointer; }
+.conn input { display: none; }
+.conn__body {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: rgba(11,36,77,.75);
+  border: 2px solid transparent;
+  font: 700 15px "Jura";
+  color: #fff;
+  transition: border-color .2s, background .2s;
+}
+.conn input:checked + .conn__body {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+}
+.conn__dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+}
+.conn input:checked + .conn__body .conn__dot {
+  background: #fff;
+  box-shadow: inset 0 0 0 3px var(--accent);
+  border-color: #fff;
+}
+
+.modal__submit {
+  display: block; margin: 20px auto 0;
+  padding: 14px 48px;
+  border: none; border-radius: 24px;
+  background: var(--accent); color: #fff;
+  font: 700 22px "Jura";
+  cursor: pointer;
+  transition: transform .15s, background .2s;
+}
+.modal__submit:hover { transform: translateY(-2px); background: var(--accent-2); }
+
+/* =========================================================
+   10. Адаптив
+   ========================================================= */
+@media (max-width: 1024px) {
+  .container, .header__inner, .footer__inner,
+  .hero__container, .diag-hero__container { padding: 0 20px; }
+  .nav { gap: 24px; margin-left: 20px; }
+  .nav__link { font-size: 16px; }
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__title { font-size: 52px; }
+  .offers__grid { grid-template-columns: 1fr; }
+  .offer { min-height: 340px; }
+  .checks__grid { grid-template-columns: repeat(2, 1fr); }
+  .why__grid { grid-template-columns: 1fr 1fr; }
+  .why__divider { display: none; }
+  .promo__grid { grid-template-columns: 1fr; padding: 0 24px; }
+  .promo__divider { display: none; }
+  .recommendations__grid { grid-template-columns: 1fr; }
+  .diag-hero__container { grid-template-columns: 1fr; }
+  .diag-hero__side { display: none; }
+  .providers { grid-template-columns: repeat(2, 1fr); }
+  .wifi-item { grid-template-columns: 1fr; text-align: left; }
+  .wifi-hero { flex-direction: column; }
+  .wifi-hero__city { display: none; }
+}
+
+@media (max-width: 640px) {
+  .header__inner { flex-wrap: wrap; height: auto; padding: 12px 20px; gap: 12px; }
+  .nav { order: 3; width: 100%; overflow-x: auto; }
+  .hero__title { font-size: 40px; }
+  .offers__title, .why__title, .checks__title, .recommendations__title { font-size: 28px; }
+  .checks__grid { grid-template-columns: 1fr; }
+  .why__grid { grid-template-columns: 1fr; }
+  .providers { grid-template-columns: 1fr; }
+  .result-table__row { grid-template-columns: 1fr 1fr; }
+  .ring { width: 180px; height: 180px; }
+  .ring__value { font-size: 40px; }
+}

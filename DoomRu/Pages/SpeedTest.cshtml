@@ -1,0 +1,232 @@
+﻿@page
+@model SpeedTestModel
+@{
+    ViewData["Title"] = "Диагностика интернета";
+}
+
+<section class="result-hero">
+    <h2 class="result-hero__title">Проверка скорости интернета</h2>
+    <div class="ring" id="ring" style="--p: 0;">
+        <svg viewBox="0 0 240 240" aria-hidden="true">
+            <circle class="ring__track" cx="120" cy="120" r="100"></circle>
+            <circle class="ring__fill" cx="120" cy="120" r="100"></circle>
+        </svg>
+        <div class="ring__label">
+            <div class="ring__value" id="ringValue">0%</div>
+            <div class="ring__caption" id="ringCaption">Готов</div>
+        </div>
+    </div>
+    <p class="result-hero__note" id="ringNote">
+        Нажмите «Запустить тест» — замер займёт около минуты.
+    </p>
+
+    <div class="result-actions" style="padding-top:10px;">
+        <button id="startBtn" class="btn btn--primary" onclick="runTest()">
+            Запустить тест
+        </button>
+    </div>
+</section>
+
+<section class="result-table">
+    <div class="result-table__row result-table__row--head">
+        <span>Показатель</span><span>Ориентир</span><span>Факт</span><span>Вывод</span>
+    </div>
+    <div class="result-table__row">
+        <span class="result-table__name">Пинг</span>
+        <span class="result-table__value">≤ 30 мс</span>
+        <span class="result-table__value result-table__value--fact" id="factPing">—</span>
+        <span class="badge badge--good" id="verdictPing">…</span>
+    </div>
+    <div class="result-table__row">
+        <span class="result-table__name">Скорость скачивания</span>
+        <span class="result-table__value">≥ 100 Мбит/с</span>
+        <span class="result-table__value result-table__value--fact" id="factDown">—</span>
+        <span class="badge badge--good" id="verdictDown">…</span>
+    </div>
+    <div class="result-table__row">
+        <span class="result-table__name">Скорость отдачи</span>
+        <span class="result-table__value">≥ 50 Мбит/с</span>
+        <span class="result-table__value result-table__value--fact" id="factUp">—</span>
+        <span class="badge badge--good" id="verdictUp">…</span>
+    </div>
+</section>
+
+<section class="recommendations">
+    <h2 class="recommendations__title">Рекомендации для лучшей работы интернета</h2>
+    <div class="recommendations__grid">
+        <div class="recommendations__col">
+            <div class="recommendations__col-title recommendations__col-title--free">
+                Бесплатные рекомендации
+                <span class="badge badge--muted">0 ₽</span>
+            </div>
+            <div class="rec rec--free-1">
+                <span class="rec__icon"></span>
+                <div>
+                    <div class="rec__title">Разместите роутер в центре квартиры</div>
+                    <div class="rec__text">Сигнал будет равномернее во всех комнатах</div>
+                </div>
+            </div>
+            <div class="rec rec--free-2">
+                <span class="rec__icon"></span>
+                <div>
+                    <div class="rec__title">Обновите ПО роутера</div>
+                    <div class="rec__text">Повышает стабильность и безопасность</div>
+                </div>
+            </div>
+            <div class="rec rec--free-3">
+                <span class="rec__icon"></span>
+                <div>
+                    <div class="rec__title">Ограничьте фоновые загрузки</div>
+                    <div class="rec__text">Они могут снижать скорость вечером</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recommendations__col">
+            <div class="recommendations__col-title recommendations__col-title--paid">
+                Платные рекомендации
+                <span class="badge badge--muted">от 99 ₽</span>
+            </div>
+            <div class="rec rec--paid-1">
+                <span class="rec__icon"></span>
+                <div>
+                    <div class="rec__title">Увеличьте скорость тарифа</div>
+                    <div class="rec__text">Больше возможностей для работы, игр и 4К</div>
+                </div>
+            </div>
+            <div class="rec rec--paid-2">
+                <span class="rec__icon"></span>
+                <div>
+                    <div class="rec__title">Подключите «Игровой режим»</div>
+                    <div class="rec__text">Минимальный пинг в онлайн-играх</div>
+                </div>
+            </div>
+            <div class="rec rec--paid-3">
+                <span class="rec__icon"></span>
+                <div>
+                    <div class="rec__title">Установите Mesh-систему</div>
+                    <div class="rec__text">Стабильный сигнал в любой точке</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="result-actions">
+    <button class="btn btn--ghost" onclick="window.print()">Скачать результат</button>
+</div>
+
+@section Scripts {
+    <script>
+        // ====== Параметры ======
+        // Если появится внешний API спидтеста — вставьте его URL сюда.
+        // Пока пусто — работаем на своём сервере.
+        const EXTERNAL_API_URL = "";
+
+        const $ = id => document.getElementById(id);
+
+        function setVerdict(elId, ok) {
+            const el = $(elId);
+            if (ok) { el.textContent = 'Отлично'; el.className = 'badge badge--good'; }
+            else     { el.textContent = 'Слабо';   el.className = 'badge badge--muted'; }
+        }
+
+        function updateRing(score) {
+            $('ring').style.setProperty('--p', score);
+            $('ringValue').textContent = score + '%';
+            const caption = score >= 80 ? 'Отлично!' : score >= 50 ? 'Нормально' : 'Слабо';
+            $('ringCaption').textContent = caption;
+            $('ringNote').innerHTML =
+                'Ваше подключение работает ' +
+                (score >= 80 ? 'отлично.' : score >= 50 ? 'в пределах нормы.' : 'нестабильно.') +
+                '<br>Все ключевые показатели — выше.';
+        }
+
+        async function measurePing() {
+            const results = [];
+            for (let i = 0; i < 5; i++) {
+                const t0 = performance.now();
+                await fetch('/api/speedtest/download?mb=1&_=' + Math.random(), { cache: 'no-store' });
+                results.push(performance.now() - t0);
+            }
+            results.sort((a,b)=>a-b);
+            return results[Math.floor(results.length/2)];
+        }
+
+        async function measureDownload() {
+            const SIZE_MB = 10;
+            const t0 = performance.now();
+            const resp = await fetch('/api/speedtest/download?mb=' + SIZE_MB + '&_=' + Math.random(), { cache: 'no-store' });
+            const blob = await resp.blob();
+            const t1 = performance.now();
+            const seconds = (t1 - t0) / 1000;
+            return (blob.size * 8) / (seconds * 1e6);
+        }
+
+        async function measureUpload() {
+            const SIZE_MB = 5;
+            const buf = new Uint8Array(SIZE_MB * 1024 * 1024);
+            crypto.getRandomValues(buf.subarray(0, 65536));
+            const blob = new Blob([buf]);
+            const t0 = performance.now();
+            await fetch('/api/speedtest/upload', { method: 'POST', body: blob });
+            const t1 = performance.now();
+            const seconds = (t1 - t0) / 1000;
+            return (blob.size * 8) / (seconds * 1e6);
+        }
+
+        async function runTest() {
+            const btn = $('startBtn');
+            btn.disabled = true;
+
+            $('factPing').textContent = '—';
+            $('factDown').textContent = '—';
+            $('factUp').textContent   = '—';
+            $('verdictPing').textContent = '…';
+            $('verdictDown').textContent = '…';
+            $('verdictUp').textContent   = '…';
+            updateRing(0);
+            $('ringNote').textContent = 'Идёт замер…';
+
+            try {
+                if (EXTERNAL_API_URL) {
+                    const r = await fetch(EXTERNAL_API_URL);
+                    const d = await r.json();
+                    $('factPing').textContent = (d.ping ?? '—') + ' мс';
+                    $('factDown').textContent = (d.download ?? '—') + ' Мбит/с';
+                    $('factUp').textContent   = (d.upload ?? '—') + ' Мбит/с';
+                    setVerdict('verdictPing', (d.ping ?? 999) <= 30);
+                    setVerdict('verdictDown', (d.download ?? 0) >= 100);
+                    setVerdict('verdictUp',   (d.upload ?? 0) >= 50);
+                    updateRing(90);
+                    btn.disabled = false;
+                    return;
+                }
+
+                const ping = await measurePing();
+                $('factPing').textContent = ping.toFixed(0) + ' мс';
+                setVerdict('verdictPing', ping <= 30);
+
+                const down = await measureDownload();
+                $('factDown').textContent = down.toFixed(1) + ' Мбит/с';
+                setVerdict('verdictDown', down >= 100);
+
+                const up = await measureUpload();
+                $('factUp').textContent = up.toFixed(1) + ' Мбит/с';
+                setVerdict('verdictUp', up >= 50);
+
+                // Общая оценка 0–100
+                const score = Math.min(100, Math.round(
+                    (Math.min(down, 500) / 500) * 60 +
+                    (Math.min(up, 500) / 500) * 20 +
+                    Math.max(0, 20 - ping / 5)
+                ));
+                updateRing(score);
+            } catch (e) {
+                $('ringNote').textContent = 'Ошибка: ' + e.message;
+            } finally {
+                btn.disabled = false;
+            }
+        }
+    </script>
+}

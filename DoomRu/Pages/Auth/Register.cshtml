@@ -1,0 +1,31 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="page-card">
+    <h1>Регистрация по номеру телефона</h1>
+
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="field-validation-error"></div>
+
+        <label asp-for="Input.Phone">Номер телефона</label>
+        <input asp-for="Input.Phone" type="tel" placeholder="+79001234567" autocomplete="tel" />
+        <span asp-validation-for="Input.Phone" class="field-validation-error"></span>
+
+        <label asp-for="Input.Password">Пароль</label>
+        <input asp-for="Input.Password" type="password" autocomplete="new-password" />
+        <span asp-validation-for="Input.Password" class="field-validation-error"></span>
+
+        <label asp-for="Input.ConfirmPassword">Повтор пароля</label>
+        <input asp-for="Input.ConfirmPassword" type="password" autocomplete="new-password" />
+        <span asp-validation-for="Input.ConfirmPassword" class="field-validation-error"></span>
+
+        <button type="submit" class="btn-dr">Создать аккаунт</button>
+    </form>
+
+    <p style="margin-top:18px;text-align:center;">
+        Уже есть аккаунт? <a asp-page="./Login">Войти</a>
+    </p>
+</div>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Мой Дом.ру</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inder&family=Jura:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__inner">
+      <a class="logo" href="index.html" aria-label="Дом.ру"></a>
+      <nav class="nav">
+        <a class="nav__link" href="index.html">Главная</a>
+        <a class="nav__link" href="wifi.html">WI-FI рядом</a>
+        <a class="nav__link" href="diagnost.html">Диагностика интернета</a>
+      </nav>
+      <div class="header__actions">
+        <div class="user">
+          <span class="user__avatar"></span>
+          <span>Гость</span>
+          <span class="user__arrow"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__banner"></div>
+      <div class="hero__container">
+        <div class="hero__grid">
+          <div>
+            <span class="hero__welcome"></span>
+            <h1 class="hero__title">
+              Привет,
+              <span class="hero__title-accent">гость!</span>
+            </h1>
+            <p class="hero__subtitle">
+              В Мой Дом.ру вы можете проверить интернет, найти WI-FI рядом
+              и узнать, что посмотреть. Начните с того, что вам нужно прямо сейчас.
+            </p>
+          </div>
+
+          <div class="login">
+            <h2 class="login__title">Войдите в приложение</h2>
+            <p class="login__hint">
+              Введите номер телефона, чтобы получить доступ к сервисам
+            </p>
+            <div class="login__field">
+              <input type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__"
+                     aria-label="Номер телефона">
+            </div>
+            <button class="login__btn" type="button" data-login>
+              Продолжить
+              <span class="login__btn-arrow"></span>
+            </button>
+            <p class="login__terms">
+              Нажимая «Продолжить», вы соглашаетесь с
+              <a href="#">Условиями обработки данных</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="offers">
+        <h2 class="offers__title">Что мы предлагаем?</h2>
+        <div class="offers__grid">
+
+          <article class="offer offer--check" data-href="diagnost.html">
+            <div class="offer__content">
+              <h3 class="offer__title">Проверить интернет</h3>
+              <p class="offer__text">
+                Узнайте, насколько стабильно работает ваше подключение.
+              </p>
+            </div>
+            <button class="offer__btn" type="button" aria-label="Открыть">
+              <span class="offer__btn-arrow"></span>
+            </button>
+          </article>
+
+          <article class="offer offer--wide">
+            <div class="offer__content">
+              <h3 class="offer__title">Ваш цифровой дом начинается здесь</h3>
+              <p class="offer__text">
+                Быстрый доступ к полезным сервисам, даже если вы ещё не наш клиент.
+              </p>
+              <div class="offer__icons">
+                <div class="offer__icon-item">
+                  <span class="offer__icon offer__icon--1"></span>
+                  Быстрый вход по номеру телефона
+                </div>
+                <div class="offer__icon-item">
+                  <span class="offer__icon offer__icon--2"></span>
+                  Больше, чем интернет
+                </div>
+                <div class="offer__icon-item">
+                  <span class="offer__icon offer__icon--3"></span>
+                  Полезные сервисы для повседневной жизни
+                </div>
+                <div class="offer__icon-item">
+                  <span class="offer__icon offer__icon--4"></span>
+                  Без регистрации и лишних шагов
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="offer offer--quest" data-href="wifi.html">
+            <div class="offer__content">
+              <h3 class="offer__title">Начать квест</h3>
+              <p class="offer__text">
+                Собери 5 точек Wi-Fi рядом с домом и получи промокод на скидку.
+              </p>
+            </div>
+            <button class="offer__btn" type="button" aria-label="Открыть">
+              <span class="offer__btn-arrow"></span>
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <section class="why">
+        <h2 class="why__title">Почему это удобно?</h2>
+        <div class="why__grid">
+          <div class="why__item">
+            <div class="why__icon why__icon--1"></div>
+            <h3 class="why__item-title">Быстро</h3>
+            <p class="why__item-text">Самые важные сервисы под рукой</p>
+          </div>
+          <div class="why__divider"></div>
+
+          <div class="why__item">
+            <div class="why__icon why__icon--2"></div>
+            <h3 class="why__item-title">Удобно</h3>
+            <p class="why__item-text">Без лишних шагов и звонков</p>
+          </div>
+          <div class="why__divider why__divider--2"></div>
+
+          <div class="why__item">
+            <div class="why__icon why__icon--3"></div>
+            <h3 class="why__item-title">Полезно</h3>
+            <p class="why__item-text">Решайте повседневные задачи</p>
+          </div>
+          <div class="why__divider why__divider--3"></div>
+
+          <div class="why__item">
+            <div class="why__icon why__icon--4"></div>
+            <h3 class="why__item-title">Ближе к дому</h3>
+            <p class="why__item-text">Постепенно открываем всё больше</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__logo"></span>
+      <span class="footer__text">Цифровые сервисы и технологии для вашего дома</span>
+      <a class="footer__link" href="#">Подробнее о Дом.ру</a>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>

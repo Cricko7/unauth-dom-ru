@@ -1,0 +1,213 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\images\v268_7.png" />
+    <Content Remove="wwwroot\images\v268_9.png" />
+    <Content Remove="wwwroot\images\v278_10.png" />
+    <Content Remove="wwwroot\images\v278_14.png" />
+    <Content Remove="wwwroot\images\v278_22.png" />
+    <Content Remove="wwwroot\images\v278_23.png" />
+    <Content Remove="wwwroot\images\v278_24.png" />
+    <Content Remove="wwwroot\images\v278_25.png" />
+    <Content Remove="wwwroot\images\v278_27.png" />
+    <Content Remove="wwwroot\images\v278_28.png" />
+    <Content Remove="wwwroot\images\v278_29.png" />
+    <Content Remove="wwwroot\images\v278_30.png" />
+    <Content Remove="wwwroot\images\v278_31.png" />
+    <Content Remove="wwwroot\images\v278_32.png" />
+    <Content Remove="wwwroot\images\v278_33.png" />
+    <Content Remove="wwwroot\images\v278_34.png" />
+    <Content Remove="wwwroot\images\v278_36.png" />
+    <Content Remove="wwwroot\images\v278_39.png" />
+    <Content Remove="wwwroot\images\v278_40.png" />
+    <Content Remove="wwwroot\images\v278_43.png" />
+    <Content Remove="wwwroot\images\v278_6.png" />
+    <Content Remove="wwwroot\images\v278_8.png" />
+    <Content Remove="wwwroot\images\v300_11.png" />
+    <Content Remove="wwwroot\images\v300_13.png" />
+    <Content Remove="wwwroot\images\v300_16.png" />
+    <Content Remove="wwwroot\images\v300_23.png" />
+    <Content Remove="wwwroot\images\v300_26.png" />
+    <Content Remove="wwwroot\images\v300_30.png" />
+    <Content Remove="wwwroot\images\v300_33.png" />
+    <Content Remove="wwwroot\images\v300_36.png" />
+    <Content Remove="wwwroot\images\v300_37.png" />
+    <Content Remove="wwwroot\images\v300_38.png" />
+    <Content Remove="wwwroot\images\v300_39.png" />
+    <Content Remove="wwwroot\images\v300_57.png" />
+    <Content Remove="wwwroot\images\v300_59.png" />
+    <Content Remove="wwwroot\images\v300_68.png" />
+    <Content Remove="wwwroot\images\v300_71.png" />
+    <Content Remove="wwwroot\images\v300_72.png" />
+    <Content Remove="wwwroot\images\v300_73.png" />
+    <Content Remove="wwwroot\images\v300_74.png" />
+    <Content Remove="wwwroot\images\v300_75.png" />
+    <Content Remove="wwwroot\images\v300_77.png" />
+    <Content Remove="wwwroot\images\v300_78.png" />
+    <Content Remove="wwwroot\images\v301_80.png" />
+    <Content Remove="wwwroot\images\v303_106.png" />
+    <Content Remove="wwwroot\images\v310_147.png" />
+    <Content Remove="wwwroot\images\v310_149.png" />
+    <Content Remove="wwwroot\images\v310_152.png" />
+    <Content Remove="wwwroot\images\v310_159.png" />
+    <Content Remove="wwwroot\images\v310_168.png" />
+    <Content Remove="wwwroot\images\v311_2.png" />
+    <Content Remove="wwwroot\images\v311_3.png" />
+    <Content Remove="wwwroot\images\v311_30.png" />
+    <Content Remove="wwwroot\images\v311_31.png" />
+    <Content Remove="wwwroot\images\v311_33.png" />
+    <Content Remove="wwwroot\images\v311_34.png" />
+    <Content Remove="wwwroot\images\v311_35.png" />
+    <Content Remove="wwwroot\images\v311_36.png" />
+    <Content Remove="wwwroot\images\v311_46.png" />
+    <Content Remove="wwwroot\images\v311_47.png" />
+    <Content Remove="wwwroot\images\v311_48.png" />
+    <Content Remove="wwwroot\images\v311_49.png" />
+    <Content Remove="wwwroot\images\v311_5.png" />
+    <Content Remove="wwwroot\images\v311_51.png" />
+    <Content Remove="wwwroot\images\v311_52.png" />
+    <Content Remove="wwwroot\images\v312_13.png" />
+    <Content Remove="wwwroot\images\v312_2.png" />
+    <Content Remove="wwwroot\images\v312_4.png" />
+    <Content Remove="wwwroot\images\v312_6.png" />
+    <Content Remove="wwwroot\images\v313_117.png" />
+    <Content Remove="wwwroot\images\v313_128.png" />
+    <Content Remove="wwwroot\images\v313_130.png" />
+    <Content Remove="wwwroot\images\v313_133.png" />
+    <Content Remove="wwwroot\images\v313_138.png" />
+    <Content Remove="wwwroot\images\v313_145.png" />
+    <Content Remove="wwwroot\images\v313_149.png" />
+    <Content Remove="wwwroot\images\v313_165.png" />
+    <Content Remove="wwwroot\images\v313_33.png" />
+    <Content Remove="wwwroot\images\v313_34.png" />
+    <Content Remove="wwwroot\images\v313_35.png" />
+    <Content Remove="wwwroot\images\v313_36.png" />
+    <Content Remove="wwwroot\images\v313_38.png" />
+    <Content Remove="wwwroot\images\v313_40.png" />
+    <Content Remove="wwwroot\images\v313_42.png" />
+    <Content Remove="wwwroot\images\v313_45.png" />
+    <Content Remove="wwwroot\images\v313_46.png" />
+    <Content Remove="wwwroot\images\v313_49.png" />
+    <Content Remove="wwwroot\images\v313_50.png" />
+    <Content Remove="wwwroot\images\v313_52.png" />
+    <Content Remove="wwwroot\images\v313_54.png" />
+    <Content Remove="wwwroot\images\v313_56.png" />
+    <Content Remove="wwwroot\images\v313_61.png" />
+    <Content Remove="wwwroot\images\v313_89.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\v268_7.png" />
+    <None Include="wwwroot\images\v268_9.png" />
+    <None Include="wwwroot\images\v278_10.png" />
+    <None Include="wwwroot\images\v278_14.png" />
+    <None Include="wwwroot\images\v278_22.png" />
+    <None Include="wwwroot\images\v278_23.png" />
+    <None Include="wwwroot\images\v278_24.png" />
+    <None Include="wwwroot\images\v278_25.png" />
+    <None Include="wwwroot\images\v278_27.png" />
+    <None Include="wwwroot\images\v278_28.png" />
+    <None Include="wwwroot\images\v278_29.png" />
+    <None Include="wwwroot\images\v278_30.png" />
+    <None Include="wwwroot\images\v278_31.png" />
+    <None Include="wwwroot\images\v278_32.png" />
+    <None Include="wwwroot\images\v278_33.png" />
+    <None Include="wwwroot\images\v278_34.png" />
+    <None Include="wwwroot\images\v278_36.png" />
+    <None Include="wwwroot\images\v278_39.png" />
+    <None Include="wwwroot\images\v278_40.png" />
+    <None Include="wwwroot\images\v278_43.png" />
+    <None Include="wwwroot\images\v278_6.png" />
+    <None Include="wwwroot\images\v278_8.png" />
+    <None Include="wwwroot\images\v300_11.png" />
+    <None Include="wwwroot\images\v300_13.png" />
+    <None Include="wwwroot\images\v300_16.png" />
+    <None Include="wwwroot\images\v300_23.png" />
+    <None Include="wwwroot\images\v300_26.png" />
+    <None Include="wwwroot\images\v300_30.png" />
+    <None Include="wwwroot\images\v300_33.png" />
+    <None Include="wwwroot\images\v300_36.png" />
+    <None Include="wwwroot\images\v300_37.png" />
+    <None Include="wwwroot\images\v300_38.png" />
+    <None Include="wwwroot\images\v300_39.png" />
+    <None Include="wwwroot\images\v300_57.png" />
+    <None Include="wwwroot\images\v300_59.png" />
+    <None Include="wwwroot\images\v300_68.png" />
+    <None Include="wwwroot\images\v300_71.png" />
+    <None Include="wwwroot\images\v300_72.png" />
+    <None Include="wwwroot\images\v300_73.png" />
+    <None Include="wwwroot\images\v300_74.png" />
+    <None Include="wwwroot\images\v300_75.png" />
+    <None Include="wwwroot\images\v300_77.png" />
+    <None Include="wwwroot\images\v300_78.png" />
+    <None Include="wwwroot\images\v301_80.png" />
+    <None Include="wwwroot\images\v303_106.png" />
+    <None Include="wwwroot\images\v310_147.png" />
+    <None Include="wwwroot\images\v310_149.png" />
+    <None Include="wwwroot\images\v310_152.png" />
+    <None Include="wwwroot\images\v310_159.png" />
+    <None Include="wwwroot\images\v310_168.png" />
+    <None Include="wwwroot\images\v311_2.png" />
+    <None Include="wwwroot\images\v311_3.png" />
+    <None Include="wwwroot\images\v311_30.png" />
+    <None Include="wwwroot\images\v311_31.png" />
+    <None Include="wwwroot\images\v311_33.png" />
+    <None Include="wwwroot\images\v311_34.png" />
+    <None Include="wwwroot\images\v311_35.png" />
+    <None Include="wwwroot\images\v311_36.png" />
+    <None Include="wwwroot\images\v311_46.png" />
+    <None Include="wwwroot\images\v311_47.png" />
+    <None Include="wwwroot\images\v311_48.png" />
+    <None Include="wwwroot\images\v311_49.png" />
+    <None Include="wwwroot\images\v311_5.png" />
+    <None Include="wwwroot\images\v311_51.png" />
+    <None Include="wwwroot\images\v311_52.png" />
+    <None Include="wwwroot\images\v312_13.png" />
+    <None Include="wwwroot\images\v312_2.png" />
+    <None Include="wwwroot\images\v312_4.png" />
+    <None Include="wwwroot\images\v312_6.png" />
+    <None Include="wwwroot\images\v313_117.png" />
+    <None Include="wwwroot\images\v313_128.png" />
+    <None Include="wwwroot\images\v313_130.png" />
+    <None Include="wwwroot\images\v313_133.png" />
+    <None Include="wwwroot\images\v313_138.png" />
+    <None Include="wwwroot\images\v313_145.png" />
+    <None Include="wwwroot\images\v313_149.png" />
+    <None Include="wwwroot\images\v313_165.png" />
+    <None Include="wwwroot\images\v313_33.png" />
+    <None Include="wwwroot\images\v313_34.png" />
+    <None Include="wwwroot\images\v313_35.png" />
+    <None Include="wwwroot\images\v313_36.png" />
+    <None Include="wwwroot\images\v313_38.png" />
+    <None Include="wwwroot\images\v313_40.png" />
+    <None Include="wwwroot\images\v313_42.png" />
+    <None Include="wwwroot\images\v313_45.png" />
+    <None Include="wwwroot\images\v313_46.png" />
+    <None Include="wwwroot\images\v313_49.png" />
+    <None Include="wwwroot\images\v313_50.png" />
+    <None Include="wwwroot\images\v313_52.png" />
+    <None Include="wwwroot\images\v313_54.png" />
+    <None Include="wwwroot\images\v313_56.png" />
+    <None Include="wwwroot\images\v313_61.png" />
+    <None Include="wwwroot\images\v313_89.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.12" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+  </ItemGroup>
+
+</Project>

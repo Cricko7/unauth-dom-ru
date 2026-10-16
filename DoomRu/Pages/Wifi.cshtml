@@ -1,0 +1,120 @@
+﻿@page
+@model WifiModel
+@{
+    ViewData["Title"] = "WI-FI рядом";
+}
+
+<div class="container">
+    <section class="wifi-hero">
+        <div class="wifi-hero__left">
+            <div class="wifi-hero__icon"></div>
+            <h1 class="wifi-hero__title">WI-FI рядом</h1>
+            <p class="wifi-hero__text">
+                Находи точки WI-FI в городе, подключайся и выполни квест,
+                чтобы получить промокод
+            </p>
+            <div class="filters">
+                <button class="filter is-active" type="button">Все</button>
+                <button class="filter" type="button">Рядом</button>
+                <button class="filter" type="button">Бесплатные</button>
+            </div>
+        </div>
+        <div class="wifi-hero__city"></div>
+    </section>
+
+    <section class="wifi-map">
+        <iframe title="Карта WI-FI точек"
+                src="https://yandex.ru/map-widget/v1/?ll=39.718800%2C47.222530&z=13"
+                allowfullscreen loading="lazy"></iframe>
+    </section>
+
+    <section class="wifi-list">
+        <article class="wifi-item">
+            <span class="wifi-item__icon"></span>
+            <div>
+                <div class="wifi-item__name">Кофейня «Бодрый день»</div>
+                <div class="wifi-item__addr">ул. Ленина, 24</div>
+            </div>
+            <span class="wifi-item__dist">320 м</span>
+            <span class="wifi-item__status wifi-item__status--ok">
+                <span class="wifi-item__check"></span>Посещена
+            </span>
+            <button class="wifi-item__btn">Подключиться <span class="wifi-item__btn-arrow"></span></button>
+        </article>
+
+        <article class="wifi-item">
+            <span class="wifi-item__icon wifi-item__icon--2"></span>
+            <div>
+                <div class="wifi-item__name">ТЦ «Северный»</div>
+                <div class="wifi-item__addr">ул. Ленина, 34</div>
+            </div>
+            <span class="wifi-item__dist">350 м</span>
+            <span class="wifi-item__status wifi-item__status--avail">
+                <span class="wifi-item__dot"></span>Доступна
+            </span>
+            <button class="wifi-item__btn">Подключиться <span class="wifi-item__btn-arrow"></span></button>
+        </article>
+
+        <article class="wifi-item">
+            <span class="wifi-item__icon wifi-item__icon--3"></span>
+            <div>
+                <div class="wifi-item__name">Библиотека им. Пушкина</div>
+                <div class="wifi-item__addr">ул. Советская, 7</div>
+            </div>
+            <span class="wifi-item__dist">740 м</span>
+            <span class="wifi-item__status wifi-item__status--broken">
+                <span class="wifi-item__cross"></span>Не работает
+            </span>
+            <button class="wifi-item__btn">Подробнее <span class="wifi-item__btn-arrow"></span></button>
+        </article>
+
+        <article class="wifi-item">
+            <span class="wifi-item__icon wifi-item__icon--4"></span>
+            <div>
+                <div class="wifi-item__name">Парк «Центральный»</div>
+                <div class="wifi-item__addr">ул. Парковая, 1</div>
+            </div>
+            <span class="wifi-item__dist">1,2 км</span>
+            <span class="wifi-item__status wifi-item__status--avail">
+                <span class="wifi-item__dot"></span>Доступна
+            </span>
+            <button class="wifi-item__btn">Подключиться <span class="wifi-item__btn-arrow"></span></button>
+        </article>
+
+        <article class="wifi-item">
+            <span class="wifi-item__icon wifi-item__icon--5"></span>
+            <div>
+                <div class="wifi-item__name">Коворкинг «Точка»</div>
+                <div class="wifi-item__addr">ул. Суворова, 88</div>
+            </div>
+            <span class="wifi-item__dist">1,5 км</span>
+            <span class="wifi-item__status wifi-item__status--ok">
+                <span class="wifi-item__check"></span>Посещена
+            </span>
+            <button class="wifi-item__btn">Подключиться <span class="wifi-item__btn-arrow"></span></button>
+        </article>
+    </section>
+
+    <section class="quest">
+        <span class="quest__icon"></span>
+        <span class="quest__title">Квест: подключись к 5 точкам и получи промокод</span>
+        <span class="quest__counter"><span>2</span> из <span>5</span> точек</span>
+        <div class="quest__bar"><div class="quest__progress"></div></div>
+    </section>
+
+    <section class="upsell">
+        <span class="upsell__icon"></span>
+        <div class="upsell__content">
+            <div class="upsell__title">Хотите, чтобы интернет работал ещё быстрее?</div>
+            <div class="upsell__text">
+                Подключите более высокий тариф от Дом.ру. Больше скорости.
+                Больше возможностей. Тот же надёжный интернет.
+            </div>
+        </div>
+        <div class="upsell__router"></div>
+        <div>
+            <div class="upsell__price">от 700 ₽ в месяц</div>
+            <button class="upsell__btn" type="button">Выбрать тариф</button>
+        </div>
+    </section>
+</div>

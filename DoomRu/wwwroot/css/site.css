@@ -1,0 +1,169 @@
+﻿/*html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}*/
+/* ====== Фирменный стиль Дом.ру — красный / белый ====== */
+:root {
+    --dr-red: #ED1C24;
+    --dr-red-dark: #B8151B;
+    --dr-black: #111111;
+    --dr-white: #ffffff;
+}
+
+html, body {
+    background: var(--dr-white);
+    color: var(--dr-black);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+}
+
+/* --- Навбар --- */
+.dr-navbar {
+    background: var(--dr-red);
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
+}
+
+    .dr-navbar .nav-link {
+        color: #fff !important;
+        font-weight: 500;
+    }
+
+        .dr-navbar .nav-link:hover {
+            text-decoration: underline;
+        }
+
+.dr-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff !important;
+}
+
+.dr-logo {
+    color: #fff;
+}
+
+.dr-logo2 {
+    color: #ffdfe1;
+}
+
+/* --- Кнопки --- */
+.btn-dr {
+    background: var(--dr-red);
+    border-color: var(--dr-red);
+    color: #fff;
+    font-weight: 600;
+}
+
+    .btn-dr:hover {
+        background: var(--dr-red-dark);
+        border-color: var(--dr-red-dark);
+        color: #fff;
+    }
+
+/* --- Карточки --- */
+.dr-card {
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+    .dr-card .card-header {
+        background: var(--dr-red);
+        color: #fff;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        font-weight: 600;
+    }
+
+/* --- Чат --- */
+#chatBox {
+    height: 380px;
+    overflow-y: auto;
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #eee;
+}
+
+.chat-msg {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 80%;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.chat-user {
+    background: var(--dr-red);
+    color: #fff;
+    margin-left: auto;
+    border-bottom-right-radius: 2px;
+}
+
+.chat-ai {
+    background: #fff;
+    border: 1px solid #eee;
+    color: var(--dr-black);
+    border-bottom-left-radius: 2px;
+}
+
+/* --- Cookie-баннер --- */
+.dr-cookie-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #222;
+    color: #fff;
+    padding: 12px 0;
+    z-index: 9999;
+    font-size: .95rem;
+}
+
+/* --- Футер --- */
+.dr-footer {
+    background: #f5f5f5;
+    color: #444;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* --- Спидтест --- */
+.st-gauge {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--dr-red);
+}
+
+.st-sub {
+    color: #666;
+}

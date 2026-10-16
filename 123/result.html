@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Результат диагностики — Дом.ру</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inder&family=Jura:wght@400;500;700&family=Kanchenjunga:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__inner">
+      <a class="logo" href="index.html" aria-label="Дом.ру"></a>
+      <nav class="nav">
+        <a class="nav__link" href="index.html">Главная</a>
+        <a class="nav__link" href="wifi.html">WI-FI рядом</a>
+        <a class="nav__link" href="diagnost.html">Диагностика интернета</a>
+      </nav>
+      <div class="header__actions">
+        <div class="user">
+          <span class="user__avatar"></span>
+          <span>Гость</span>
+          <span class="user__arrow"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="result-hero">
+      <h2 class="result-hero__title">Результаты диагностики сети</h2>
+      <div class="ring" style="--p: 87;">
+        <svg viewBox="0 0 240 240" aria-hidden="true">
+          <circle class="ring__track" cx="120" cy="120" r="100"></circle>
+          <circle class="ring__fill"  cx="120" cy="120" r="100"></circle>
+        </svg>
+        <div class="ring__label">
+          <div class="ring__value">87%</div>
+          <div class="ring__caption">Отлично!</div>
+        </div>
+      </div>
+      <p class="result-hero__note">
+        Ваше подключение работает отлично.<br>
+        Все ключевые показатели в норме.
+      </p>
+    </section>
+
+    <section class="result-table">
+      <div class="result-table__row result-table__row--head">
+        <span>Показатель</span><span>Тариф</span><span>Факт</span><span>Вывод</span>
+      </div>
+      <div class="result-table__row">
+        <span class="result-table__name">Скорость скачивания</span>
+        <span class="result-table__value">300 Мбит/с</span>
+        <span class="result-table__value result-table__value--fact">300 Мбит/с</span>
+        <span class="badge badge--good">Отлично</span>
+      </div>
+      <div class="result-table__row">
+        <span class="result-table__name">Скорость загрузки</span>
+        <span class="result-table__value">100 Мбит/с</span>
+        <span class="result-table__value result-table__value--fact">100 Мбит/с</span>
+        <span class="badge badge--good">Отлично</span>
+      </div>
+      <div class="result-table__row">
+        <span class="result-table__name">Пинг</span>
+        <span class="result-table__value">—</span>
+        <span class="result-table__value result-table__value--fact">12 мс</span>
+        <span class="badge badge--good">Отлично</span>
+      </div>
+      <div class="result-table__row">
+        <span class="result-table__name">Стабильность</span>
+        <span class="result-table__value">—</span>
+        <span class="result-table__value result-table__value--fact">99,7%</span>
+        <span class="badge badge--good">Отлично</span>
+      </div>
+    </section>
+
+    <section class="recommendations">
+      <h2 class="recommendations__title">Рекомендации для лучшей работы интернета</h2>
+      <div class="recommendations__grid">
+        <div class="recommendations__col">
+          <div class="recommendations__col-title recommendations__col-title--free">
+            Бесплатные рекомендации
+            <span class="badge badge--muted">0 ₽</span>
+          </div>
+          <div class="rec rec--free-1">
+            <span class="rec__icon"></span>
+            <div>
+              <div class="rec__title">Разместите роутер в центре квартиры</div>
+              <div class="rec__text">Так сигнал будет равномернее во всех комнатах</div>
+            </div>
+          </div>
+          <div class="rec rec--free-2">
+            <span class="rec__icon"></span>
+            <div>
+              <div class="rec__title">Обновите ПО роутера</div>
+              <div class="rec__text">Это повышает стабильность и безопасность</div>
+            </div>
+          </div>
+          <div class="rec rec--free-3">
+            <span class="rec__icon"></span>
+            <div>
+              <div class="rec__title">Ограничьте фоновые загрузки</div>
+              <div class="rec__text">Они могут снижать скорость, особенно вечером</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="recommendations__col">
+          <div class="recommendations__col-title recommendations__col-title--paid">
+            Платные рекомендации
+            <span class="badge badge--muted">от 99 ₽</span>
+          </div>
+          <div class="rec rec--paid-1">
+            <span class="rec__icon"></span>
+            <div>
+              <div class="rec__title">Увеличьте скорость тарифа</div>
+              <div class="rec__text">Больше возможностей для работы, игр и 4К</div>
+            </div>
+          </div>
+          <div class="rec rec--paid-2">
+            <span class="rec__icon"></span>
+            <div>
+              <div class="rec__title">Подключите услугу «Игровой режим»</div>
+              <div class="rec__text">Минимальный пинг в онлайн-играх</div>
+            </div>
+          </div>
+          <div class="rec rec--paid-3">
+            <span class="rec__icon"></span>
+            <div>
+              <div class="rec__title">Установите Mesh-систему WI-FI</div>
+              <div class="rec__text">Стабильный сигнал в любой точке квартиры</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="result-actions">
+      <button class="btn btn--primary" onclick="location.href='diagnost.html'">Проверить ещё раз</button>
+      <button class="btn btn--ghost">Скачать результат</button>
+    </div>
+
+    <section class="quest">
+      <span class="quest__icon"></span>
+      <span class="quest__title">Квест: подключись к 5 точкам и получи промокод</span>
+      <span class="quest__counter"><span>2</span> из <span>5</span> точек</span>
+      <div class="quest__bar"><div class="quest__progress"></div></div>
+    </section>
+
+    <section class="upsell">
+      <span class="upsell__icon"></span>
+      <div class="upsell__content">
+        <div class="upsell__title">Хотите, чтобы интернет работал ещё быстрее?</div>
+        <div class="upsell__text">
+          Подключите более высокий тариф от Дом.ру. Больше скорости.
+          Больше возможностей. Тот же надёжный интернет.
+        </div>
+      </div>
+      <div class="upsell__router"></div>
+      <div>
+        <div class="upsell__price">от 700 ₽ в месяц</div>
+        <button class="upsell__btn" type="button">Выбрать тариф</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__logo"></span>
+      <span class="footer__text">Цифровые сервисы и технологии для вашего дома</span>
+      <a class="footer__link" href="#">Подробнее о Дом.ру</a>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>

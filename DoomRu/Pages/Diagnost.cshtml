@@ -1,0 +1,173 @@
+﻿@page
+@model DiagnostModel
+@{
+    ViewData["Title"] = "Диагностика интернета";
+}
+
+<section class="diag-hero">
+    <div class="diag-hero__banner"></div>
+    <div class="diag-hero__container">
+        <div>
+            <h1 class="diag-hero__title">Проверим <span>ваш интернет</span></h1>
+            <p class="diag-hero__text">
+                Проверим как стабильно работает ваше подключение
+                и подскажем, как улучшить его качество.
+            </p>
+            <button class="diag-hero__btn" type="button" data-open-modal>
+                Начать диагностику <span class="diag-hero__btn-arrow"></span>
+            </button>
+            <p class="diag-hero__note">Займёт около 1–2 минут</p>
+        </div>
+        <div class="diag-hero__side"></div>
+    </div>
+</section>
+
+<div class="container">
+    <section class="checks">
+        <h2 class="checks__title">Что мы проверим?</h2>
+        <div class="checks__grid">
+            <article class="check">
+                <div class="check__icon check__icon--1"></div>
+                <h3 class="check__title">Скорость</h3>
+                <p class="check__text">Проверим, соответствует ли она заявленной в тарифе</p>
+            </article>
+            <article class="check">
+                <div class="check__icon check__icon--2"></div>
+                <h3 class="check__title">Стабильность</h3>
+                <p class="check__text">Узнаем, нет ли потерь соединения</p>
+            </article>
+            <article class="check">
+                <div class="check__icon check__icon--3"></div>
+                <h3 class="check__title">Задержка</h3>
+                <p class="check__text">Проверим, как быстро передаются данные</p>
+            </article>
+            <article class="check">
+                <div class="check__icon check__icon--4"></div>
+                <h3 class="check__title">Причины</h3>
+                <p class="check__text">Подскажем, что может влиять на качество</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="promo">
+        <div class="promo__bg"></div>
+        <div class="promo__grid">
+            <div>
+                <h2 class="promo__title">Быстро. Удобно. Без лишних действий.</h2>
+                <p class="promo__text">
+                    Проверьте интернет прямо сейчас и получите персональные
+                    рекомендации по улучшению связи
+                </p>
+                <div class="promo__badge">
+                    <span class="promo__badge-icon"></span>Это бесплатно
+                </div>
+            </div>
+            <div class="promo__divider"></div>
+            <div class="promo__list">
+                <span>Без регистрации</span>
+                <span>Без установки приложения</span>
+                <span>Всего в несколько кликов</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+@* ---------- Модальное окно ---------- *@
+<div class="modal" id="diagModal" hidden>
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true">
+        <button class="modal__close" data-close-modal aria-label="Закрыть">✕</button>
+
+        <div class="modal__head">
+            <div class="modal__icon"></div>
+            <div>
+                <h2 class="modal__title">Ответьте на несколько вопросов для успешной диагностики</h2>
+                <p class="modal__subtitle">Это займёт всего пару минут.</p>
+            </div>
+        </div>
+
+        <form>
+            <div class="q">
+                <div class="q__head">
+                    <div class="q__num">1</div>
+                    <span class="q__title">Услугами какого провайдера вы пользуетесь?</span>
+                </div>
+                <div class="providers">
+                    <label class="provider provider--domru">
+                        <input type="radio" name="provider" value="domru" checked>
+                        <span class="provider__body"><span class="provider__icon"></span><span class="provider__name">Дом.ру</span></span>
+                    </label>
+                    <label class="provider provider--rtk">
+                        <input type="radio" name="provider" value="rtk">
+                        <span class="provider__body"><span class="provider__icon"></span><span class="provider__name">Ростелеком</span></span>
+                    </label>
+                    <label class="provider provider--beeline">
+                        <input type="radio" name="provider" value="beeline">
+                        <span class="provider__body"><span class="provider__icon"></span><span class="provider__name">Билайн</span></span>
+                    </label>
+                    <label class="provider provider--mts">
+                        <input type="radio" name="provider" value="mts">
+                        <span class="provider__body"><span class="provider__icon"></span><span class="provider__name">МТС</span></span>
+                    </label>
+                    <label class="provider provider--ttk">
+                        <input type="radio" name="provider" value="ttk">
+                        <span class="provider__body"><span class="provider__icon"></span><span class="provider__name">ТТК</span></span>
+                    </label>
+                    <label class="provider provider--other">
+                        <input type="radio" name="provider" value="other">
+                        <span class="provider__body"><span class="provider__icon"></span><span class="provider__name">Другое</span></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="q">
+                <div class="q__head">
+                    <div class="q__num">2</div>
+                    <span class="q__title">Какая скорость у вас по тарифу?</span>
+                </div>
+                <div class="speeds">
+                    <label class="speed"><input type="radio" name="speed" value="50"><span class="speed__body">50 Мбит/с</span></label>
+                    <label class="speed"><input type="radio" name="speed" value="100" checked><span class="speed__body">100 Мбит/с</span></label>
+                    <label class="speed"><input type="radio" name="speed" value="300"><span class="speed__body">300 Мбит/с</span></label>
+                    <label class="speed"><input type="radio" name="speed" value="unknown"><span class="speed__body">Не знаю</span></label>
+                </div>
+            </div>
+
+            <div class="q">
+                <div class="q__head">
+                    <div class="q__num">3</div>
+                    <span class="q__title">Какой у вас роутер?</span>
+                </div>
+                <select class="router" name="router">
+                    <option value="">Выберите модель роутера</option>
+                    <option>TP-Link Archer C6</option>
+                    <option>TP-Link Archer AX23</option>
+                    <option>Keenetic Giga</option>
+                    <option>Keenetic Hero 4S</option>
+                    <option>Asus RT-AX53U</option>
+                    <option>Xiaomi Router 4A</option>
+                    <option>Другая модель</option>
+                </select>
+            </div>
+
+            <div class="q">
+                <div class="q__head">
+                    <div class="q__num">4</div>
+                    <span class="q__title">Как вы сейчас подключены?</span>
+                </div>
+                <div class="conns">
+                    <label class="conn">
+                        <input type="radio" name="connection" value="cable" checked>
+                        <span class="conn__body"><span class="conn__dot"></span>Кабель</span>
+                    </label>
+                    <label class="conn">
+                        <input type="radio" name="connection" value="wifi">
+                        <span class="conn__body"><span class="conn__dot"></span>WI-FI</span>
+                    </label>
+                </div>
+            </div>
+
+            <button class="modal__submit" type="submit">Замерить</button>
+        </form>
+    </div>
+</div>

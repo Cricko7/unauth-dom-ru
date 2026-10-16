@@ -1,0 +1,215 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<section class="hero">
+    <div class="hero__banner"></div>
+    <div class="hero__container">
+        <div class="hero__grid">
+            <div>
+                <span class="hero__welcome"></span>
+                <h1 class="hero__title">
+                    Привет,
+                    <span class="hero__title-accent">@(User.Identity?.IsAuthenticated == true ? User.Identity.Name : "гость")!</span>
+                </h1>
+                <p class="hero__subtitle">
+                    В Мой Дом.ру вы можете проверить интернет, найти WI-FI рядом
+                    и спросить нашего ИИ-помощника. Начните с того, что нужно прямо сейчас.
+                </p>
+            </div>
+
+            <div class="login">
+                <h2 class="login__title">Войдите в приложение</h2>
+                <p class="login__hint">Введите номер телефона, чтобы получить доступ к сервисам</p>
+                <div class="login__field">
+                    <input type="tel" inputmode="tel"
+                           placeholder="+7 (___) ___-__-__"
+                           aria-label="Номер телефона" />
+                </div>
+                <button class="login__btn" type="button" data-login>
+                    Продолжить
+                    <span class="login__btn-arrow"></span>
+                </button>
+                <p class="login__terms">
+                    Нажимая «Продолжить», вы соглашаетесь с
+                    <a asp-page="/Privacy">Условиями обработки данных</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* ---------- ИИ-ЧАТ ---------- *@
+<section class="chat-section container">
+    <div class="chat-card">
+        <div class="chat-card__head">
+            <div class="chat-card__icon">🤖</div>
+            <div>
+                <div class="chat-card__title">ИИ-ассистент Дом.ру</div>
+                <div class="chat-card__sub">
+                    Задайте любой вопрос про тарифы, интернет, роутеры, умный дом.
+                </div>
+            </div>
+        </div>
+
+        <div id="chatBox"></div>
+
+        <div class="chat-input-wrap">
+            <textarea id="userInput" rows="2" maxlength="500"
+                      placeholder="Введите сообщение (максимум 500 символов)…"></textarea>
+            <button class="chat-send" id="sendBtn" onclick="sendMessage()">Отправить</button>
+        </div>
+        <div class="chat-meta">
+            <span>История хранится только в памяти страницы и сбрасывается при перезагрузке.</span>
+            <span><span id="charCount">0</span>/500</span>
+        </div>
+    </div>
+</section>
+
+@* ---------- Что мы предлагаем ---------- *@
+<div class="container">
+    <section class="offers">
+        <h2 class="offers__title">Что мы предлагаем?</h2>
+        <div class="offers__grid">
+
+            <article class="offer offer--check" data-href="/Diagnost">
+                <div class="offer__content">
+                    <h3 class="offer__title">Проверить интернет</h3>
+                    <p class="offer__text">Узнайте, насколько стабильно работает ваше подключение.</p>
+                </div>
+                <button class="offer__btn" type="button" aria-label="Открыть">
+                    <span class="offer__btn-arrow"></span>
+                </button>
+            </article>
+
+            <article class="offer offer--wide">
+                <div class="offer__content">
+                    <h3 class="offer__title">Ваш цифровой дом начинается здесь</h3>
+                    <p class="offer__text">
+                        Быстрый доступ к полезным сервисам, даже если вы ещё не наш клиент.
+                    </p>
+                    <div class="offer__icons">
+                        <div class="offer__icon-item"><span class="offer__icon offer__icon--1"></span>Быстрый вход по номеру</div>
+                        <div class="offer__icon-item"><span class="offer__icon offer__icon--2"></span>Больше, чем интернет</div>
+                        <div class="offer__icon-item"><span class="offer__icon offer__icon--3"></span>Сервисы для жизни</div>
+                        <div class="offer__icon-item"><span class="offer__icon offer__icon--4"></span>Без лишних шагов</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="offer offer--quest" data-href="/Wifi">
+                <div class="offer__content">
+                    <h3 class="offer__title">Начать квест</h3>
+                    <p class="offer__text">
+                        Собери 5 точек Wi-Fi рядом и получи промокод на скидку.
+                    </p>
+                </div>
+                <button class="offer__btn" type="button" aria-label="Открыть">
+                    <span class="offer__btn-arrow"></span>
+                </button>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="why">
+        <h2 class="why__title">Почему это удобно?</h2>
+        <div class="why__grid">
+            <div class="why__item">
+                <div class="why__icon why__icon--1"></div>
+                <h3 class="why__item-title">Быстро</h3>
+                <p class="why__item-text">Самые важные сервисы под рукой</p>
+            </div>
+            <div class="why__divider"></div>
+            <div class="why__item">
+                <div class="why__icon why__icon--2"></div>
+                <h3 class="why__item-title">Удобно</h3>
+                <p class="why__item-text">Без лишних шагов и звонков</p>
+            </div>
+            <div class="why__divider why__divider--2"></div>
+            <div class="why__item">
+                <div class="why__icon why__icon--3"></div>
+                <h3 class="why__item-title">Полезно</h3>
+                <p class="why__item-text">Решайте повседневные задачи</p>
+            </div>
+            <div class="why__divider why__divider--3"></div>
+            <div class="why__item">
+                <div class="why__icon why__icon--4"></div>
+                <h3 class="why__item-title">Ближе к дому</h3>
+                <p class="why__item-text">Постепенно открываем всё больше</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script>
+        // ======== ИИ-ЧАТ (бэкенд не трогаем: /api/aichat/send) ========
+        const history = [];
+        const chatBox = document.getElementById('chatBox');
+        const input   = document.getElementById('userInput');
+        const charEl  = document.getElementById('charCount');
+        let   warned  = false;
+
+        input.addEventListener('input', () => charEl.textContent = input.value.length);
+        input.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+        });
+
+        function appendMessage(text, who) {
+            const div = document.createElement('div');
+            div.className = 'chat-msg ' + (who === 'user' ? 'chat-user' : 'chat-ai');
+            div.textContent = text;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const text = input.value.trim();
+            if (!text) return;
+
+            if (!warned) {
+                const ok = confirm(
+                    'Внимание!\n\n' +
+                    'История чата хранится только в памяти страницы и будет ' +
+                    'полностью удалена при её перезагрузке.\n\nПродолжить?'
+                );
+                if (!ok) return;
+                warned = true;
+            }
+
+            appendMessage(text, 'user');
+            history.push({ role: 'user', content: text });
+            input.value = ''; charEl.textContent = '0';
+
+            const sendBtn = document.getElementById('sendBtn');
+            sendBtn.disabled = true;
+            appendMessage('…печатает', 'ai');
+            const lastAi = chatBox.lastChild;
+
+            try {
+                const resp = await fetch('/api/aichat/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text, history: history.slice(0, -1) })
+                });
+                const data = await resp.json();
+                lastAi.remove();
+                if (data.success) {
+                    appendMessage(data.reply, 'ai');
+                    history.push({ role: 'assistant', content: data.reply });
+                } else {
+                    appendMessage('⚠️ ' + (data.error || 'Ошибка'), 'ai');
+                }
+            } catch {
+                lastAi.remove();
+                appendMessage('⚠️ Ошибка соединения с сервером', 'ai');
+            } finally {
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+    </script>
+}
