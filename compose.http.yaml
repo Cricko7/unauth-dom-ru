@@ -1,0 +1,11 @@
+services:
+  proxy:
+    image: "${CADDY_IMAGE:-caddy:2}"
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./deploy/Caddyfile.http:/etc/caddy/Caddyfile:ro
+    depends_on:
+      web:
+        condition: service_healthy

@@ -5,7 +5,7 @@ services:
       ASPNETCORE_HTTPS_PORT: "443"
       ReverseProxy__KnownProxy: 172.30.77.10
   proxy:
-    image: caddy:2
+    image: "${CADDY_IMAGE:-caddy:2}"
     restart: unless-stopped
     ports:
       - "80:80"

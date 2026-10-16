@@ -16,7 +16,7 @@ services:
       db:
         condition: service_healthy
   db:
-    image: postgres:17-bookworm
+    image: "${POSTGRES_IMAGE:-postgres:17-bookworm}"
     restart: unless-stopped
     environment:
       POSTGRES_DB: doomru

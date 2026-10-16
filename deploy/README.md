@@ -19,9 +19,15 @@ curl --fail http://localhost:8080/health
 
 Автоматическая проверка (Python 3, только стандартная библиотека): `python deploy/smoke.py`. Она проверяет БД, страницы, CSS/картинки, download/upload и регистрацию/вход; создаёт один тестовый аккаунт, поэтому запускайте её на тестовой БД.
 
+Для проверки после пересоздания контейнеров добавьте `--state-file /tmp/doomru-smoke-state.json` и повторите ту же команду после `down` / `up` без `-v`. Скрипт проверит сохранность сессии и входа. Файл состояния и соседний `.cookies` содержат тестовые учётные данные: храните их вне репозитория и удалите после проверки.
+
+Если Docker Hub недоступен, задайте `POSTGRES_IMAGE=public.ecr.aws/docker/library/postgres:17-bookworm` и `CADDY_IMAGE=public.ecr.aws/docker/library/caddy:2` в `.env`.
+
 Остановка с сохранением данных: `docker compose down`. Ключ `-v` удаляет данные и ключи авторизации — для обычной остановки его не используйте.
 
 ## Развёртывание на Linux VPS
+
+Для временной проверки по IP без домена используйте `docker compose -f compose.yaml -f compose.http.yaml up -d --build --wait`. Сайт будет доступен на HTTP-порту 80. Для публичного использования авторизации подключите домен и вариант с HTTPS ниже. Одновременно HTTP- и HTTPS-варианты запускать не нужно: оба используют порт 80. При переходе на HTTPS выполните `docker compose -f compose.yaml -f compose.production.yaml up -d --build --wait --remove-orphans`, сохранив `APP_BIND=127.0.0.1` и `APP_PORT=8080`.
 
 Установите Docker Engine и Compose по официальной инструкции для ОС сервера. Направьте A-запись домена на IP сервера (AAAA указывайте только при рабочем IPv6). Откройте TCP 80/443 и SSH в межсетевом экране. Порт PostgreSQL наружу не публикуется.
 
