@@ -1,5 +1,9 @@
 # Мой Дом.ру · Solid Eagle
 
+<p align="center">
+  <img src="docs/assets/mydomrulogo.png" alt="Логотип Мой Дом.ру" width="160">
+</p>
+
 [![CI and deploy](https://github.com/Cricko7/unauth-dom-ru/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Cricko7/unauth-dom-ru/actions/workflows/ci-cd.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
