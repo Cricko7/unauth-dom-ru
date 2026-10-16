@@ -46,6 +46,18 @@ jobs:
           docker compose -f compose.yaml -f compose.http.yaml down
           docker compose -f compose.yaml -f compose.http.yaml up -d --wait --wait-timeout 180
           python3 deploy/smoke.py --url http://127.0.0.1 --state-file "$RUNNER_TEMP/doomru-smoke.json"
+      - name: Check transition from legacy EnsureCreated schema
+        run: |
+          docker compose -f compose.yaml -f compose.http.yaml stop web
+          docker compose exec -T db psql -U doomru -d doomru -v ON_ERROR_STOP=1 -c 'DROP TABLE "__EFMigrationsHistory";'
+          docker compose exec -T db psql -U doomru -d doomru -v ON_ERROR_STOP=1 < database/baseline.sql
+          docker compose -f compose.yaml -f compose.http.yaml up -d --wait --wait-timeout 180
+          python3 deploy/smoke.py --url http://127.0.0.1 --state-file "$RUNNER_TEMP/doomru-smoke.json"
+      - name: Validate public schema without private data
+        run: |
+          docker compose exec -T db createdb -U doomru doomru_schema_check
+          docker compose exec -T db psql -U doomru -d doomru_schema_check -v ON_ERROR_STOP=1 < database/schema.sql
+          test "$(docker compose exec -T db psql -U doomru -d doomru_schema_check -Atc 'SELECT count(*) FROM "AspNetUsers";')" = 0
       - name: Container diagnostics on failure
         if: failure()
         run: |

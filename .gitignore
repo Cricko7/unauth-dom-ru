@@ -11,3 +11,5 @@
 *.p12
 backups/
 publish/
+*.dump
+database/private/

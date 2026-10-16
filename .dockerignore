@@ -8,6 +8,8 @@
 **/*.pfx
 **/*.p12
 backups
+**/*.dump
+database/private
 **/appsettings.Local.json
 work
 outputs

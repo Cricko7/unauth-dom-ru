@@ -74,13 +74,14 @@ def main():
     phone = previous['phone'] if previous else '+79' + ''.join(str(secrets.randbelow(10)) for _ in range(9))
     password = previous['password'] if previous else 'a' + secrets.token_hex(16)
     if not previous:
-        with submit('/Auth/Register', {'Input.Phone': phone, 'Input.Password': password,
+        formatted_phone = f'8 ({phone[2:5]}) {phone[5:8]}-{phone[8:10]}-{phone[10:12]}'
+        with submit('/Auth/Register', {'Input.Phone': formatted_phone, 'Input.Password': password,
                                       'Input.ConfirmPassword': password}) as response:
             assert urllib.parse.urlparse(response.url).path in ['/', '/Index'], 'Registration failed'
             assert phone in html.unescape(response.read().decode()), 'Registered user missing'
     jar.clear()
-    with submit('/Auth/Login', {'Input.Phone': phone, 'Input.Password': password}) as response:
-        assert urllib.parse.urlparse(response.url).path in ['/', '/Index'], 'Login failed'
+    with submit('/Auth/Login?returnUrl=%2FSpeedTest', {'Input.Phone': phone[2:], 'Input.Password': password}) as response:
+        assert urllib.parse.urlparse(response.url).path == '/SpeedTest', 'Login or local returnUrl failed'
         assert phone in html.unescape(response.read().decode()), 'Authenticated user missing'
     print('PASS: health, pages, static assets, download/upload, registration and login')
     if state_path:

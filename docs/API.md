@@ -87,6 +87,6 @@ head -c 1048576 /dev/urandom | curl --request POST \
 | GET, POST | `/Auth/Login` | Форма и вход |
 | POST | `/Auth/Logout` | Выход |
 
-Это Razor Pages с `application/x-www-form-urlencoded`, cookie и `__RequestVerificationToken`. Регистрация принимает `Input.Phone`, `Input.Password`, `Input.ConfirmPassword`; вход — `Input.Phone`, `Input.Password`, `Input.RememberMe`. Сначала получите страницу и antiforgery-токен, затем отправьте форму в той же сессии. Успех ведёт редиректом на главную, ошибка валидации возвращает HTML формы. Телефон: `+7` + 10 цифр; пароль: минимум 6 символов и хотя бы одна строчная буква согласно правилам Identity. SMS не отправляется.
+Это Razor Pages с `application/x-www-form-urlencoded`, cookie и `__RequestVerificationToken`. Регистрация принимает `Input.Phone`, `Input.Password`, `Input.ConfirmPassword`; вход — `Input.Phone`, `Input.Password`, `Input.RememberMe`. Сначала получите страницу и antiforgery-токен, затем отправьте форму в той же сессии. Успех регистрации ведёт на главную, вход поддерживает локальный `returnUrl`; ошибка валидации возвращает HTML формы. В V4.5 номер нормализуется в `+7` + 10 цифр: принимаются маска, пробелы/дефисы, префикс `8` и десять цифр без кода страны. Пароль: минимум 6 символов и хотя бы одна строчная буква согласно правилам Identity. SMS не отправляется.
 
 Рабочий пример программной работы с формами — [`deploy/smoke.py`](../deploy/smoke.py).

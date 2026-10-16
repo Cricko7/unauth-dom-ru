@@ -1,21 +1,28 @@
-﻿@page
+@page
 @model LoginModel
 @{
     ViewData["Title"] = "Вход";
 }
 
 <div class="page-card">
-    <h1>Вход в Мой Дом.ру</h1>
+    <h1>Вход в Мой ДОМ.РУ</h1>
 
     <form method="post">
         <div asp-validation-summary="ModelOnly" class="field-validation-error"></div>
 
-        <label asp-for="Input.Phone">Номер телефона</label>
-        <input asp-for="Input.Phone" type="tel" placeholder="+79001234567" autocomplete="tel" />
+        <label for="phoneVisible">Номер телефона</label>
+        <input type="tel"
+               id="phoneVisible"
+               placeholder="+7 (___) ___-__-__"
+               autocomplete="tel"
+               value="@Model.Input.Phone" />
+
+        @* Реальное значение, которое уйдёт на сервер *@
+        <input type="hidden" asp-for="Input.Phone" id="phoneHidden" />
         <span asp-validation-for="Input.Phone" class="field-validation-error"></span>
 
         <label asp-for="Input.Password">Пароль</label>
-        <input asp-for="Input.Password" type="password" />
+        <input asp-for="Input.Password" type="password" autocomplete="current-password" />
         <span asp-validation-for="Input.Password" class="field-validation-error"></span>
 
         <label style="display:flex;gap:8px;align-items:center;margin-top:16px;">
@@ -30,3 +37,50 @@
         Нет аккаунта? <a asp-page="./Register">Зарегистрируйтесь</a>
     </p>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        (function () {
+            const visible = document.getElementById('phoneVisible');
+            const hidden  = document.getElementById('phoneHidden');
+            if (!visible || !hidden) return;
+
+            // чистим номер: оставляем только +7XXXXXXXXXX
+            function clean(v) {
+                let d = (v || '').replace(/\D/g, '');
+                if (!d) return '';
+                if (d[0] === '8') d = '7' + d.slice(1);
+                if (d[0] !== '7') d = '7' + d;
+                d = d.slice(0, 11);
+                return '+' + d;
+            }
+
+            // красивое отображение
+            function pretty(digits) {
+                if (!digits) return '';
+                let d = digits.replace(/\D/g, '');
+                if (d.length < 1) return '';
+                let out = '+7';
+                if (d.length > 1) out += ' (' + d.slice(1, 4);
+                if (d.length >= 5) out += ') ' + d.slice(4, 7);
+                if (d.length >= 8) out += '-' + d.slice(7, 9);
+                if (d.length >= 10) out += '-' + d.slice(9, 11);
+                return out;
+            }
+
+            function sync() {
+                hidden.value = clean(visible.value);
+            }
+
+            visible.addEventListener('input', sync);
+            visible.closest('form')?.addEventListener('submit', sync);
+
+            // если сервер вернул значение (например, из query string) — форматируем
+            if (hidden.value) {
+                visible.value = pretty(hidden.value);
+            }
+        })();
+    </script>
+}

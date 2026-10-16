@@ -47,6 +47,9 @@ builder.Services.AddRazorPages(options =>
     // Публичные страницы
     options.Conventions.AllowAnonymousToPage("/Index");
     options.Conventions.AllowAnonymousToPage("/SpeedTest");
+    options.Conventions.AllowAnonymousToPage("/Diagnost");
+    options.Conventions.AllowAnonymousToPage("/Wifi");
+    options.Conventions.AllowAnonymousToPage("/Result");
     options.Conventions.AllowAnonymousToPage("/Privacy");
     options.Conventions.AllowAnonymousToPage("/Auth/Login");
     options.Conventions.AllowAnonymousToPage("/Auth/Register");
@@ -84,11 +87,11 @@ app.MapGet("/health", async (DoomRuContext db) =>
         ? Results.Ok(new { status = "healthy" })
         : Results.StatusCode(503));
 
-// ---------- Автосоздание БД при первом запуске ----------
+// ---------- Применение версионируемой схемы БД ----------
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<DoomRuContext>();
-    await db.Database.EnsureCreatedAsync();
+    await db.Database.MigrateAsync();
 }
 
 app.Run();

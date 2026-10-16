@@ -21,11 +21,8 @@ namespace DoomRu.Pages.Auth
         public class InputModel
         {
             [Required(ErrorMessage = "Введите номер телефона")]
-            [RegularExpression(@"^\+7\d{10}$",
-                ErrorMessage = "Формат: +79001234567")]
             [Display(Name = "Номер телефона")]
             public string Phone { get; set; } = "";
-
             [Required(ErrorMessage = "Введите пароль")]
             [StringLength(100, MinimumLength = 6, ErrorMessage = "Минимум 6 символов")]
             [DataType(DataType.Password)]
@@ -44,12 +41,22 @@ namespace DoomRu.Pages.Auth
         {
             if (!ModelState.IsValid) return Page();
 
-            // Используем номер телефона как UserName
+            // нормализуем: убираем всё, кроме цифр, приводим к +7XXXXXXXXXX
+            var digits = new string(Input.Phone.Where(char.IsDigit).ToArray());
+            if (digits.StartsWith("8")) digits = "7" + digits.Substring(1);
+            if (!digits.StartsWith("7")) digits = "7" + digits;
+            if (digits.Length != 11)
+            {
+                ModelState.AddModelError(nameof(Input.Phone), "Формат: +79001234567");
+                return Page();
+            }
+            Input.Phone = "+" + digits;
+
             var user = new IdentityUser
             {
                 UserName = Input.Phone,
                 PhoneNumber = Input.Phone,
-                PhoneNumberConfirmed = true // без SMS-подтверждения
+                PhoneNumberConfirmed = true
             };
 
             var result = await _userManager.CreateAsync(user, Input.Password);
