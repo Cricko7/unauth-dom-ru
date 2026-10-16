@@ -9,3 +9,4 @@
 **/appsettings.Local.json
 *.pfx
 *.p12
+backups/

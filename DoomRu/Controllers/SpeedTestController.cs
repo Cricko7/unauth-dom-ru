@@ -28,7 +28,7 @@ namespace DoomRu.Controllers
             // Заполняем случайными данными, чтобы gzip не сжимал
             Random.Shared.NextBytes(buffer);
 
-            Response.Headers.Add("Cache-Control", "no-store");
+            Response.Headers["Cache-Control"] = "no-store";
             return File(buffer, "application/octet-stream");
         }
 

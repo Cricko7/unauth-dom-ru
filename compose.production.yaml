@@ -1,0 +1,34 @@
+services:
+  web:
+    environment:
+      HttpsRedirection__Enabled: "true"
+      ASPNETCORE_HTTPS_PORT: "443"
+      ReverseProxy__KnownProxy: 172.30.77.10
+  proxy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: "${DOMAIN:?Set DOMAIN in .env}"
+      ACME_EMAIL: "${ACME_EMAIL:?Set ACME_EMAIL in .env}"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      default:
+        ipv4_address: 172.30.77.10
+    depends_on:
+      web:
+        condition: service_healthy
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.30.77.0/24
+volumes:
+  caddy-data:
+  caddy-config:

@@ -4,11 +4,23 @@ using DoomRu;
 using DoomRu.Data;
 using DoomRu.Services;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.DataProtection;
+using System.Net;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    if (IPAddress.TryParse(builder.Configuration["ReverseProxy:KnownProxy"], out var proxy))
+        options.KnownProxies.Add(proxy);
+});
+var keysPath = builder.Configuration["DataProtection:KeysPath"];
+if (!string.IsNullOrWhiteSpace(keysPath))
+    builder.Services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(keysPath));
 
 // ---------- БД PostgreSQL ----------
 builder.Services.AddDbContext<DoomRuContext>(options =>
@@ -48,6 +60,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<AiChatService>();
 
 var app = builder.Build();
+app.UseForwardedHeaders();
 
 // ---------- Middleware ----------
 if (!app.Environment.IsDevelopment())
@@ -56,7 +69,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+if (builder.Configuration.GetValue("HttpsRedirection:Enabled", true))
+    app.UseWhen(context => !context.Request.Path.StartsWithSegments("/health"),
+        branch => branch.UseHttpsRedirection());
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
@@ -64,6 +79,10 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllers();
+app.MapGet("/health", async (DoomRuContext db) =>
+    await db.Database.CanConnectAsync()
+        ? Results.Ok(new { status = "healthy" })
+        : Results.StatusCode(503));
 
 // ---------- Автосоздание БД при первом запуске ----------
 using (var scope = app.Services.CreateScope())

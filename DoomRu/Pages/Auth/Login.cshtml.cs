@@ -16,15 +16,15 @@ namespace DoomRu.Pages.Auth
         public class InputModel
         {
             [Required]
-            [Display(Name = "Номер телефона")]
+            [Display(Name = "РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°")]
             public string Phone { get; set; } = "";
 
             [Required]
             [DataType(DataType.Password)]
-            [Display(Name = "Пароль")]
+            [Display(Name = "РџР°СЂРѕР»СЊ")]
             public string Password { get; set; } = "";
 
-            [Display(Name = "Запомнить меня")]
+            [Display(Name = "Р—Р°РїРѕРјРЅРёС‚СЊ РјРµРЅСЏ")]
             public bool RememberMe { get; set; }
         }
 
@@ -40,7 +40,7 @@ namespace DoomRu.Pages.Auth
             if (result.Succeeded)
                 return RedirectToPage("/Index");
 
-            ModelState.AddModelError(string.Empty, "Неверный номер телефона или пароль");
+            ModelState.AddModelError(string.Empty, "РќРµРІРµСЂРЅС‹Р№ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР° РёР»Рё РїР°СЂРѕР»СЊ");
             return Page();
         }
     }

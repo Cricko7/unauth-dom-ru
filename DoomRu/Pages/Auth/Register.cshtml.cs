@@ -20,21 +20,21 @@ namespace DoomRu.Pages.Auth
 
         public class InputModel
         {
-            [Required(ErrorMessage = "Введите номер телефона")]
+            [Required(ErrorMessage = "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°")]
             [RegularExpression(@"^\+7\d{10}$",
-                ErrorMessage = "Формат: +79001234567")]
-            [Display(Name = "Номер телефона")]
+                ErrorMessage = "Р¤РѕСЂРјР°С‚: +79001234567")]
+            [Display(Name = "РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°")]
             public string Phone { get; set; } = "";
 
-            [Required(ErrorMessage = "Введите пароль")]
-            [StringLength(100, MinimumLength = 6, ErrorMessage = "Минимум 6 символов")]
+            [Required(ErrorMessage = "Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ")]
+            [StringLength(100, MinimumLength = 6, ErrorMessage = "РњРёРЅРёРјСѓРј 6 СЃРёРјРІРѕР»РѕРІ")]
             [DataType(DataType.Password)]
-            [Display(Name = "Пароль")]
+            [Display(Name = "РџР°СЂРѕР»СЊ")]
             public string Password { get; set; } = "";
 
             [DataType(DataType.Password)]
-            [Display(Name = "Повтор пароля")]
-            [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+            [Display(Name = "РџРѕРІС‚РѕСЂ РїР°СЂРѕР»СЏ")]
+            [Compare("Password", ErrorMessage = "РџР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚")]
             public string ConfirmPassword { get; set; } = "";
         }
 
@@ -44,12 +44,12 @@ namespace DoomRu.Pages.Auth
         {
             if (!ModelState.IsValid) return Page();
 
-            // Используем номер телефона как UserName
+            // РСЃРїРѕР»СЊР·СѓРµРј РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР° РєР°Рє UserName
             var user = new IdentityUser
             {
                 UserName = Input.Phone,
                 PhoneNumber = Input.Phone,
-                PhoneNumberConfirmed = true // без SMS-подтверждения
+                PhoneNumberConfirmed = true // Р±РµР· SMS-РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ
             };
 
             var result = await _userManager.CreateAsync(user, Input.Password);

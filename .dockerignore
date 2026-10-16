@@ -1,0 +1,13 @@
+**/bin
+**/obj
+**/.vs
+.git
+.env
+.env.*
+**/*.user
+**/*.pfx
+**/*.p12
+backups
+**/appsettings.Local.json
+work
+outputs

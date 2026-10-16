@@ -1,6 +1,10 @@
 # unauth-dom-ru
 Решение от команды Solid Eagle по кейсу от "Дом.ру"
 
+## Docker
+
+Контейнеры приложения и PostgreSQL, тестирование и развёртывание на сервере с HTTPS описаны в [deploy/README.md](deploy/README.md).
+
 ## Локальная настройка
 
 Проект использует .NET 9 и PostgreSQL. В папке `123` находится отдельная HTML-верстка, в `DoomRu` — ASP.NET Core приложение.
