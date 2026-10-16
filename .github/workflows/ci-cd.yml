@@ -1,0 +1,102 @@
+name: CI and deploy
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: Build and integration tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      COMPOSE_PROJECT_NAME: doomru-ci
+      POSTGRES_IMAGE: public.ecr.aws/docker/library/postgres:17-bookworm
+      CADDY_IMAGE: public.ecr.aws/docker/library/caddy:2
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Validate scripts and configure isolated database
+        run: |
+          bash -n deploy/deploy.sh deploy/ssh-entrypoint.sh
+          shellcheck deploy/deploy.sh deploy/ssh-entrypoint.sh
+          python3 - <<'PY'
+          import secrets
+          from pathlib import Path
+          Path('.env').write_text('POSTGRES_PASSWORD=' + secrets.token_hex(24) + '\n')
+          PY
+          docker compose -f compose.yaml -f compose.http.yaml config --quiet
+          DOMAIN=example.com ACME_EMAIL=ci@example.com docker compose -f compose.yaml -f compose.production.yaml config --quiet
+      - name: Build and start application, database and proxy
+        run: docker compose -f compose.yaml -f compose.http.yaml up -d --build --wait --wait-timeout 240
+      - name: Check pages, API and authentication
+        run: python3 deploy/smoke.py --url http://127.0.0.1 --state-file "$RUNNER_TEMP/doomru-smoke.json"
+      - name: Recreate containers and check persisted data and session
+        run: |
+          docker compose -f compose.yaml -f compose.http.yaml down
+          docker compose -f compose.yaml -f compose.http.yaml up -d --wait --wait-timeout 180
+          python3 deploy/smoke.py --url http://127.0.0.1 --state-file "$RUNNER_TEMP/doomru-smoke.json"
+      - name: Container diagnostics on failure
+        if: failure()
+        run: |
+          docker compose -f compose.yaml -f compose.http.yaml ps --all
+          docker compose -f compose.yaml -f compose.http.yaml logs --no-color --tail=150
+      - name: Remove disposable CI containers and volumes
+        if: always()
+        run: docker compose -f compose.yaml -f compose.http.yaml down --volumes --remove-orphans
+
+  deploy:
+    name: Deploy to VPS
+    needs: test
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
+      vars.DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment:
+      name: production
+      url: ${{ vars.DEPLOY_URL }}
+    steps:
+      - name: Deploy tested commit using restricted SSH key
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          REVISION: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          : "${DEPLOY_SSH_KEY:?Missing DEPLOY_SSH_KEY}"
+          : "${DEPLOY_KNOWN_HOSTS:?Missing DEPLOY_KNOWN_HOSTS}"
+          : "${DEPLOY_HOST:?Missing DEPLOY_HOST}"
+          : "${DEPLOY_USER:?Missing DEPLOY_USER}"
+          : "${DEPLOY_PORT:?Missing DEPLOY_PORT}"
+          umask 077
+          key="$RUNNER_TEMP/doomru-deploy-key"
+          hosts="$RUNNER_TEMP/doomru-known-hosts"
+          trap 'rm -f "$key" "$hosts"' EXIT
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$key"
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$hosts"
+          ssh -i "$key" -p "$DEPLOY_PORT" -o IdentitiesOnly=yes -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$hosts" \
+            -o ConnectTimeout=15 -o ServerAliveInterval=20 -o ServerAliveCountMax=6 \
+            "$DEPLOY_USER@$DEPLOY_HOST" "deploy $REVISION"
+      - name: Check public health endpoint
+        env:
+          DEPLOY_URL: ${{ vars.DEPLOY_URL }}
+        run: |
+          : "${DEPLOY_URL:?Missing DEPLOY_URL}"
+          curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 3 \
+            --max-time 20 "${DEPLOY_URL%/}/health"

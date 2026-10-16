@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import secrets
 import urllib.parse
+import urllib.error
 import urllib.request
 
 
@@ -46,6 +47,17 @@ def main():
 
     with get('/health') as response:
         assert json.load(response)['status'] == 'healthy'
+    for message in ['', 'x' * 501]:
+        request = urllib.request.Request(base + '/api/aichat/send',
+            data=json.dumps({'message': message, 'history': []}).encode(),
+            headers={'Content-Type': 'application/json'})
+        try:
+            client.open(request, timeout=30)
+        except urllib.error.HTTPError as error:
+            assert error.code == 400
+            assert json.load(error)['success'] is False
+        else:
+            raise AssertionError('Invalid AI message must return HTTP 400')
     if previous:
         with get('/') as response:
             assert previous['phone'] in html.unescape(response.read().decode()), 'Session did not survive restart'
@@ -60,7 +72,7 @@ def main():
     with client.open(request, timeout=30) as response:
         assert json.load(response)['received'] == len(payload)
     phone = previous['phone'] if previous else '+79' + ''.join(str(secrets.randbelow(10)) for _ in range(9))
-    password = previous['password'] if previous else secrets.token_hex(16)
+    password = previous['password'] if previous else 'a' + secrets.token_hex(16)
     if not previous:
         with submit('/Auth/Register', {'Input.Phone': phone, 'Input.Password': password,
                                       'Input.ConfirmPassword': password}) as response:

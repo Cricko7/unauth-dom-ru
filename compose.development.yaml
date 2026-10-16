@@ -1,0 +1,5 @@
+# Use only when running ASP.NET on the host rather than in a container.
+services:
+  db:
+    ports:
+      - "127.0.0.1:5432:5432"

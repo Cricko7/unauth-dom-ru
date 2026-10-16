@@ -10,3 +10,4 @@
 *.pfx
 *.p12
 backups/
+publish/
